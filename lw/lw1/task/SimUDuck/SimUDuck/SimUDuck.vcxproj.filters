@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\lib">
+      <UniqueIdentifier>{3f5e250c-29ce-4a9d-ba8e-4e73454148d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\lib\Duck">
+      <UniqueIdentifier>{d8ac6870-11cb-4ff4-8b78-7cf0e948502f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\lib\Duck\Fly">
+      <UniqueIdentifier>{ad63129c-57f2-45e7-ac1d-7c589d2e7588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\lib\Duck\Quack">
+      <UniqueIdentifier>{8eb28e6f-73a1-4e86-bba9-5965d109906c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\lib\Duck\Dance">
+      <UniqueIdentifier>{fe968610-653f-4662-bc2b-19bb8d0282e5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SimUDuck.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IFlyBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Fly</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyWithWings.h">
+      <Filter>Исходные файлы\lib\Duck\Fly</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyNoWay.h">
+      <Filter>Исходные файлы\lib\Duck\Fly</Filter>
+    </ClInclude>
+    <ClInclude Include="IQuackBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Quack</Filter>
+    </ClInclude>
+    <ClInclude Include="MuteQuackBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Quack</Filter>
+    </ClInclude>
+    <ClInclude Include="QuackBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Quack</Filter>
+    </ClInclude>
+    <ClInclude Include="SqueakBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Quack</Filter>
+    </ClInclude>
+    <ClInclude Include="Duck.h">
+      <Filter>Исходные файлы\lib\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="DecoyDuck.h">
+      <Filter>Исходные файлы\lib\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="MallardDuck.h">
+      <Filter>Исходные файлы\lib\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelDuck.h">
+      <Filter>Исходные файлы\lib\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="RedheadDuck.h">
+      <Filter>Исходные файлы\lib\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="RubberDuck.h">
+      <Filter>Исходные файлы\lib\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="DuckFunctions.h">
+      <Filter>Исходные файлы\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="IDanceBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Dance</Filter>
+    </ClInclude>
+    <ClInclude Include="NoDanceBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Dance</Filter>
+    </ClInclude>
+    <ClInclude Include="WaltzBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Dance</Filter>
+    </ClInclude>
+    <ClInclude Include="MinuetBehavior.h">
+      <Filter>Исходные файлы\lib\Duck\Dance</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
