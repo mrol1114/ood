@@ -3,13 +3,15 @@
 #include "Duck.h"
 #include "Fly/FlyNoWay.h"
 #include "Quack/SqueakBehavior.h"
+#include "Dance/DanceNoWay.h"
+
 #include <iostream>
 
 class RubberDuck : public Duck
 {
 public:
 	RubberDuck()
-		: Duck(std::make_unique<FlyNoWay>(), std::make_unique<SqueakBehavior>(), nullptr)
+		: Duck(std::make_unique<FlyNoWay>(), std::make_unique<SqueakBehavior>(), std::make_unique<DanceNoWay>())
 	{
 	}
 
