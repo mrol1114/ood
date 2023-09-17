@@ -1,15 +1,15 @@
 #pragma once
 
 #include "Duck.h"
-#include "Fly/FlyWithWingsBehavior.h"
+#include "Fly/FlyBehavior.h"
 #include "Quack/QuackBehavior.h"
-#include "Dance/DanceWaltzBehavior.h"
+#include "Dance/DanceBehavior.h"
 
 class MallardDuck : public Duck
 {
 public:
 	MallardDuck()
-		: Duck(FlyWithWingsBehavior, QuackBehavior, DanceWaltzBehavior)
+		: Duck(FlyWithWingsBehavior(), QuackBehavior, DanceWaltzBehavior)
 	{
 	}
 

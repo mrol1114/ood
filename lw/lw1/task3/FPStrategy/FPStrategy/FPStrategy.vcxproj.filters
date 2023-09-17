@@ -26,37 +26,13 @@
     <ClInclude Include="lib\Duck\Duck.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Duck\Dance\DanceBehaviorContext.h">
+    <ClInclude Include="lib\Duck\Dance\DanceBehavior.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Duck\Dance\DanceMinuetBehavior.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Dance\DanceNoWayBehavior.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Dance\DanceWaltzBehavior.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Fly\FlyBehaviorContext.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Fly\FlyNoWayBehavior.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Fly\FlyWithWingsBehavior.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Quack\MuteQuackBehavior.h">
+    <ClInclude Include="lib\Duck\Fly\FlyBehavior.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\Duck\Quack\QuackBehavior.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Quack\QuackBehaviorContext.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\Duck\Quack\SqueakBehavior.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\Duck\DecoyDuck.h">
