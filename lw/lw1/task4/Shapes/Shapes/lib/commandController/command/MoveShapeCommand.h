@@ -18,7 +18,7 @@ public:
 		double dx, dy;
 		m_input >> id >> dx >> dy;
 
-		m_picture->GetShapeById(id)->Move(dx, dy);
+		m_picture->GetShape(id)->Move(dx, dy);
 	}
 
 private:

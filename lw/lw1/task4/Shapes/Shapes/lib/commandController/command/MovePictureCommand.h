@@ -21,7 +21,7 @@ public:
 
 		for (const auto& id : m_picture->GetIds())
 		{
-			m_picture->GetShapeById(id)->Move(dx, dy);
+			m_picture->GetShape(id)->Move(dx, dy);
 		}
 	}
 

@@ -2,13 +2,13 @@
 
 #include <memory>
 
-#include "./IDrawingStrategy.h"
+#include "./IShapeStrategy.h"
 #include "../../../canvas/Point.h"
 
-class TriangleDrawingStrategy : public IDrawingStrategy
+class TriangleShapeStrategy : public IShapeStrategy
 {
 public:
-	TriangleDrawingStrategy(Point p1, Point p2, Point p3)
+	TriangleShapeStrategy(Point p1, Point p2, Point p3)
 		: m_p1(p1)
 		, m_p2(p2)
 		, m_p3(p3)
@@ -41,7 +41,7 @@ public:
 		return ShapeType::Triangle;
 	}
 
-	std::string GetDrawParams() const override
+	std::string GetDrawInfo() const override
 	{
 		return std::to_string(m_p1.x) + " " + std::to_string(m_p1.y) + " "
 			+ std::to_string(m_p2.x) + " " + std::to_string(m_p2.y) + " "

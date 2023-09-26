@@ -3,13 +3,13 @@
 #include <memory>
 #include <iostream>
 
-#include "./IDrawingStrategy.h"
+#include "./IShapeStrategy.h"
 #include "../../../canvas/Point.h"
 
-class TextDrawingStrategy : public IDrawingStrategy
+class TextShapeStrategy : public IShapeStrategy
 {
 public:
-	TextDrawingStrategy(Point leftTopPoint, double fontSize, const std::string& text)
+	TextShapeStrategy(Point leftTopPoint, double fontSize, const std::string& text)
 	{
 		if (fontSize < 0)
 		{
@@ -38,7 +38,7 @@ public:
 		return ShapeType::Text;
 	}
 
-	std::string GetDrawParams() const override
+	std::string GetDrawInfo() const override
 	{
 		return std::to_string(m_startPoint.x) + " " + std::to_string(m_startPoint.y) + " "
 			+ std::to_string(m_fontSize) + " " + m_text;

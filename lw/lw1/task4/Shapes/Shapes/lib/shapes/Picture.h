@@ -8,7 +8,6 @@
 
 #include "./shape/Shape.h"
 #include "../canvas/ICanvas.h"
-#include "./shape/drawingStrategy/IDrawingStrategy.h"
 
 class Picture
 {
@@ -65,13 +64,13 @@ public:
 		m_shapes.at(id)->Draw(*m_canvas.get());
 	}
 
-	const ShapeElement& GetShapeById(const std::string& id) const
+	const ShapeElement& GetShape(const std::string& id) const
 	{
 		EnsureElementExists(id);
 		return m_shapes.at(id);
 	}
 
-	ShapeElement& GetShapeById(const std::string& id)
+	ShapeElement& GetShape(const std::string& id)
 	{
 		EnsureElementExists(id);
 		return m_shapes.at(id);

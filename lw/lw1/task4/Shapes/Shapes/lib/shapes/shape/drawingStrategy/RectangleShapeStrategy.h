@@ -3,13 +3,13 @@
 #include <memory>
 #include <iostream>
 
-#include "./IDrawingStrategy.h"
+#include "./IShapeStrategy.h"
 #include "../../../canvas/Point.h"
 
-class RectangleDrawingStrategy : public IDrawingStrategy
+class RectangleShapeStrategy : public IShapeStrategy
 {
 public:
-	RectangleDrawingStrategy(Point leftTopPoint, double width, double height)
+	RectangleShapeStrategy(Point leftTopPoint, double width, double height)
 	{
 		if (width < 0)
 		{
@@ -56,7 +56,7 @@ public:
 		return ShapeType::Rectangle;
 	}
 
-	std::string GetDrawParams() const override
+	std::string GetDrawInfo() const override
 	{
 		return std::to_string(m_p1.x) + " "
 			+ std::to_string(m_p1.y) + " "

@@ -6,7 +6,7 @@
 #include "./ICommand.h"
 #include "../../shapes/Picture.h"
 #include "../../canvas/Color.h"
-#include "../../shapes/shape/drawingStrategy/factory/DrawingStrategyFactory.h"
+#include "../../shapes/shape/drawingStrategy/factory/ShapeStrategyFactory.h"
 
 class ChangeShapeCommand : public ICommand
 {
@@ -19,7 +19,7 @@ public:
 
 	void Execute() override
 	{
-		DrawingStrategyFactory drawingStrategyFactory;
+		ShapeStrategyFactory shapeStrategyFactory;
 
 		std::string shapeName;
 		std::string id;
@@ -28,7 +28,7 @@ public:
 		m_input >> shapeName;
 
 		auto type = ConvertShapeNameToType(shapeName);
-		m_picture->GetShapeById(id)->SetDrawingStrategy(drawingStrategyFactory.Create(type, m_input));
+		m_picture->GetShape(id)->SetDrawingStrategy(shapeStrategyFactory.Create(type, m_input));
 	}
 
 private:

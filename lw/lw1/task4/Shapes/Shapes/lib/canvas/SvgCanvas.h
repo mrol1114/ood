@@ -11,9 +11,9 @@ public:
 		m_outFileName = outFileName;
 	}
 
-	void SetColor(Color c) override
+	void SetColor(Color color) override
 	{
-		m_c = c;
+		m_currentColor = color;
 	}
 
 	void MoveTo(double x, double y) override
@@ -26,7 +26,7 @@ public:
 	{
 		m_tags.push_back("<line x1=\"" + std::to_string(m_currentPositionX) + "\""
 			" y1=\"" + std::to_string(m_currentPositionY) + "\" x2=\"" + std::to_string(x) + "\""
-			" y2=\"" + std::to_string(y) + "\" stroke = \"" + m_c + "\"/>");
+			" y2=\"" + std::to_string(y) + "\" stroke = \"" + m_currentColor + "\"/>");
 		SaveToFile();
 	}
 
@@ -35,7 +35,7 @@ public:
 		m_tags.push_back("<ellipse cx=\"" + std::to_string(cx) + "\""
 			" cy=\"" + std::to_string(cy) + "\" rx=\"" + std::to_string(rx) + "\""
 			" ry=\"" + std::to_string(ry) + "\""
-			" stroke = \"" + m_c + "\"/>");
+			" stroke = \"" + m_currentColor + "\"/>");
 		SaveToFile();
 	}
 
@@ -43,7 +43,7 @@ public:
 		const std::string& text) override
 	{
 		m_tags.push_back("<text x = \"" + std::to_string(left) + "\"" 
-			" y = \"" + std::to_string(top) + "\" stroke = \"" + m_c + "\""
+			" y = \"" + std::to_string(top) + "\" stroke = \"" + m_currentColor + "\""
 			" font-size=\"" + std::to_string(fontSize) + "\" >" + text + "</text>");
 		SaveToFile();
 	}

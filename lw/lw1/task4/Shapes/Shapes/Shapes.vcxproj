@@ -139,11 +139,11 @@
     <ClCompile Include="lib\commandController\command\MovePictureCommand.h" />
     <ClCompile Include="lib\commandController\command\MoveShapeCommand.h" />
     <ClCompile Include="lib\shapes\Picture.h" />
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\CircleDrawingStrategy.h" />
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\RectangleDrawingStrategy.h" />
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\TextDrawingStrategy.h" />
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\TriangleDrawingStrategy.h" />
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\IDrawingStrategy.h" />
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\CircleShapeStrategy.h" />
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\RectangleShapeStrategy.h" />
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\TextShapeStrategy.h" />
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\TriangleShapeStrategy.h" />
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\IShapeStrategy.h" />
     <ClCompile Include="lib\shapes\shape\Shape.h" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -154,8 +154,8 @@
     <ClInclude Include="lib\commandController\command\ChangeShapeCommand.h" />
     <ClInclude Include="lib\commandController\command\HelpCommand.h" />
     <ClInclude Include="lib\commandController\command\ICommand.h" />
-    <ClInclude Include="lib\shapes\shape\drawingStrategy\factory\DrawingStrategyFactory.h" />
-    <ClInclude Include="lib\shapes\shape\drawingStrategy\LineDrawingStrategy.h" />
+    <ClInclude Include="lib\shapes\shape\drawingStrategy\factory\ShapeStrategyFactory.h" />
+    <ClInclude Include="lib\shapes\shape\drawingStrategy\LineShapeStrategy.h" />
     <ClInclude Include="lib\shapes\shape\ShapeType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

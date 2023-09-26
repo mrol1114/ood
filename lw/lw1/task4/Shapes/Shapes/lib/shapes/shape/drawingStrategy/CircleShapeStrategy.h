@@ -3,13 +3,13 @@
 #include <memory>
 #include <iostream>
 
-#include "./IDrawingStrategy.h"
+#include "./IShapeStrategy.h"
 #include "../../../canvas/Point.h"
 
-class CircleDrawingStrategy: public IDrawingStrategy
+class CircleShapeStrategy: public IShapeStrategy
 {
 public:
-	CircleDrawingStrategy(Point center, double radius)
+	CircleShapeStrategy(Point center, double radius)
 	{
 		if (radius < 0)
 		{
@@ -37,7 +37,7 @@ public:
 		return ShapeType::Circle;
 	}
 
-	std::string GetDrawParams() const override
+	std::string GetDrawInfo() const override
 	{
 		return std::to_string(m_center.x) + " "
 			+ std::to_string(m_center.y) + " " + std::to_string(m_radius);

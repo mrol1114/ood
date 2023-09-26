@@ -20,9 +20,9 @@ public:
 
 		for (const auto& id: m_picture->GetIds())
 		{
-			m_output << ++shapeNumber << " " << GetShapeName(m_picture->GetShapeById(id)->GetType()) << " "
-				<< " " << id << " " << m_picture->GetShapeById(id)->GetColor() << " "
-				<< m_picture->GetShapeById(id)->GetDrawParams() << std::endl;
+			m_output << ++shapeNumber << " " << GetShapeName(m_picture->GetShape(id)->GetType()) << " "
+				<< " " << id << " " << m_picture->GetShape(id)->GetColor() << " "
+				<< m_picture->GetShape(id)->GetDrawInfo() << std::endl;
 		}
 	}
 

@@ -1,12 +1,12 @@
 #pragma once
 
-#include "./IDrawingStrategy.h"
+#include "./IShapeStrategy.h"
 #include "../../../canvas/Point.h"
 
-class LineDrawingStrategy : public IDrawingStrategy
+class LineShapeStrategy : public IShapeStrategy
 {
 public:
-	LineDrawingStrategy(Point p1, Point p2)
+	LineShapeStrategy(Point p1, Point p2)
 		: m_p1(p1)
 		, m_p2(p2)
 	{
@@ -32,7 +32,7 @@ public:
 		return ShapeType::Line;
 	}
 
-	std::string GetDrawParams() const override
+	std::string GetDrawInfo() const override
 	{
 		return std::to_string(m_p1.x) + " " + std::to_string(m_p1.y) + " "
 			+ std::to_string(m_p2.x) + " " + std::to_string(m_p2.y);

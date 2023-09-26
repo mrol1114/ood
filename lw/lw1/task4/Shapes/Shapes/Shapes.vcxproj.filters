@@ -21,22 +21,22 @@
     <ClCompile Include="lib\shapes\shape\Shape.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\TextDrawingStrategy.h">
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\TextShapeStrategy.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\CircleDrawingStrategy.h">
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\CircleShapeStrategy.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\TriangleDrawingStrategy.h">
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\TriangleShapeStrategy.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\RectangleDrawingStrategy.h">
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\RectangleShapeStrategy.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="lib\canvas\ICanvas.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\shapes\shape\drawingStrategy\IDrawingStrategy.h">
+    <ClCompile Include="lib\shapes\shape\drawingStrategy\IShapeStrategy.h">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="lib\canvas\SvgCanvas.h">
@@ -86,10 +86,10 @@
     <ClInclude Include="lib\commandController\command\ICommand.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\shapes\shape\drawingStrategy\LineDrawingStrategy.h">
+    <ClInclude Include="lib\shapes\shape\drawingStrategy\LineShapeStrategy.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\shapes\shape\drawingStrategy\factory\DrawingStrategyFactory.h">
+    <ClInclude Include="lib\shapes\shape\drawingStrategy\factory\ShapeStrategyFactory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\commandController\command\HelpCommand.h">

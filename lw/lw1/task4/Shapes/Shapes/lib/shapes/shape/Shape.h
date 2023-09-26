@@ -2,14 +2,14 @@
 
 #include <memory>
 
-#include "./drawingStrategy/IDrawingStrategy.h"
+#include "./drawingStrategy/IShapeStrategy.h"
 #include "../../canvas/ICanvas.h"
 #include "./ShapeType.h"
 
 class Shape
 {
 public:
-	Shape(std::unique_ptr<IDrawingStrategy>&& drawingStrategy, const Color& color)
+	Shape(std::unique_ptr<IShapeStrategy>&& drawingStrategy, const Color& color)
 		: m_drawingStrategy(std::move(drawingStrategy))
 		, m_color(color)
 	{
@@ -25,9 +25,9 @@ public:
 		m_drawingStrategy->Move(dx, dy);
 	}
 
-	std::string GetDrawParams() const
+	std::string GetDrawInfo() const
 	{
-		return m_drawingStrategy->GetDrawParams();
+		return m_drawingStrategy->GetDrawInfo();
 	}
 
 	Color GetColor()
@@ -45,12 +45,12 @@ public:
 		m_color = c;
 	}
 
-	void SetDrawingStrategy(std::unique_ptr<IDrawingStrategy>&& drawingStrategy)
+	void SetDrawingStrategy(std::unique_ptr<IShapeStrategy>&& drawingStrategy)
 	{
 		m_drawingStrategy = std::move(drawingStrategy);
 	}
 
 private:
-	std::unique_ptr<IDrawingStrategy> m_drawingStrategy;
+	std::unique_ptr<IShapeStrategy> m_drawingStrategy;
 	Color m_color;
 };

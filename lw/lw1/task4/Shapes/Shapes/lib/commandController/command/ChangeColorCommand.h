@@ -18,7 +18,7 @@ public:
 		std::string id, color;
 		m_input >> id >> color;
 
-		m_picture->GetShapeById(id)->SetColor(color);
+		m_picture->GetShape(id)->SetColor(color);
 	}
 
 private:
