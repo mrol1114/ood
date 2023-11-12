@@ -57,46 +57,67 @@ private:
 
 		bool operator<(const ObserverElementKey& other) const
 		{
-			return type < other.type;
+			if (observer == other.observer)
+			{
+				return type < other.type;
+			}
+
+			return observer < other.observer;
 		}
 
 		ObserverType* observer;
 		EventType type;
 	};
 
+	using InsertIterator = std::multiset<ObserverElement>::iterator;
+
 public:
 	void RegisterObserver(ObserverType& observer, unsigned int priority, EventType type)override
 	{
-		if (m_observerToPriority.contains({ &observer, type }))
+		if (m_observerToPosition.contains({ &observer, type }))
 		{
 			throw std::runtime_error("Observer with given type already registered!");
 		}
 		else
 		{
-			m_observers.insert({ &observer, priority, type });
-			m_observerToPriority[{ &observer, type }] = priority;
+			ObserverElement observerElement(&observer, priority, type);
+			ObserverElementKey observerKey(&observer, type);
+
+			auto insertIterator = m_observers.insert(m_observers.end(), observerElement);
+			try
+			{
+				m_observerToPosition[observerKey] = insertIterator;
+			}
+			catch (std::exception& ex)
+			{
+				m_observers.erase(insertIterator);
+				throw ex;
+			}
 		}
 	}
 
 	void NotifyObservers()override
 	{
-		for (auto& observerContainer : m_observers)
+		auto observers = m_observers;
+		for (auto& observerContainer : observers)
 		{
 			observerContainer.observer->Update(GetChangedData(observerContainer.type), 
 				observerContainer.type);
 		}
 	}
-
+	// добавить метод дл€ отписки от событи€ removeObserver удал€ет всех
 	void RemoveObserver(ObserverType& observer, EventType type)override
 	{
-		if (!m_observerToPriority.contains({ &observer, type }))
+		ObserverElementKey observerKey(&observer, type);
+		if (!m_observerToPosition.contains(observerKey))
 		{
 			throw std::runtime_error("Can not remove observer which is not registered!");
 		}
 		else
 		{
-			m_observers.erase({ &observer, m_observerToPriority.at({&observer, type}), type });
-			m_observerToPriority.erase({ &observer, type });
+			InsertIterator& it = m_observerToPosition.at(observerKey);
+			m_observers.erase(it);
+			m_observerToPosition.erase(observerKey);
 		}
 	}
 
@@ -105,5 +126,5 @@ protected:
 
 private:
 	std::multiset<ObserverElement> m_observers;
-	std::map<ObserverElementKey, unsigned int> m_observerToPriority;
+	std::map<ObserverElementKey, InsertIterator> m_observerToPosition;
 };

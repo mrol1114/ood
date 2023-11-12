@@ -16,11 +16,11 @@ public:
 private:
 	void Update(CWeatherData const& weatherData) override
 	{
-		if (auto indoorData = dynamic_cast<const CIndoorWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Indoor)
 		{
 			m_vector->push_back("1");
 		}
-		if (auto ousideData = dynamic_cast<const COutsideWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Outdoor)
 		{
 			m_vector->push_back("2");
 		}

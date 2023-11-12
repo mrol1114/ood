@@ -1,10 +1,13 @@
 #pragma once
 
+#define _USE_MATH_DEFINES
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
 #include <climits>
 #include <map>
+#include <cmath>
 
 #include "Observer.h"
 
@@ -27,6 +30,80 @@ namespace {
 	};
 }
 
+class Stats
+{
+public:
+	void Update(double newValue)
+	{
+		if (m_min > newValue)
+		{
+			m_min = newValue;
+		}
+		if (m_max < newValue)
+		{
+			m_max = newValue;
+		}
+		m_sum += newValue;
+		m_accurenceCount++;
+	}
+
+	double GetMin()const
+	{
+		return m_min;
+	}
+
+	double GetMax()const
+	{
+		return m_max;
+	}
+
+	double GetSum()const
+	{
+		return m_sum;
+	}
+
+	double GetAccurenceCount()const
+	{
+		return m_accurenceCount;
+	}
+
+private:
+	double m_min = std::numeric_limits<double>::infinity();
+	double m_max = -std::numeric_limits<double>::infinity();
+	double m_sum = 0;
+	unsigned int m_accurenceCount = 0;
+};
+
+class WindStats
+{
+public:
+	void Update(double newValue)
+	{
+		m_cosSum += std::cos(ConvertDegreesToRadians(newValue));
+		m_sinSum += std::sin(ConvertDegreesToRadians(newValue));
+	}
+
+	double GetAverageWindDirection()
+	{
+		return ConvertRadiansToDegrees(std::atan2(m_sinSum, m_cosSum));
+	}
+
+private:
+	double ConvertDegreesToRadians(double degrees)
+	{
+		return degrees / 180 * M_PI;
+	}
+
+	double ConvertRadiansToDegrees(double degrees)
+	{
+		return degrees / M_PI * 180;
+	}
+
+private:
+	double m_cosSum = 0;
+	double m_sinSum = 0;
+};
+
 class CDisplay : public IObserver<double, StatsType>
 {
 private:
@@ -46,71 +123,33 @@ public:
 			Stats stats;
 			m_statistics[type] = stats;
 		}
-
-		for (auto type : m_staticTypes) {
-			StaticStats stats;
-			m_staticStatistics[type] = stats;
-		}
 	}
 
 private:
-	struct Stats
-	{
-		double min = std::numeric_limits<double>::infinity();
-		double max = -std::numeric_limits<double>::infinity();
-		double sum = 0;
-		unsigned countAccurance = 0;
-	};
-
-	struct StaticStats
-	{
-		std::map<double, unsigned int> values = {};
-		double maxEncounterKey = -std::numeric_limits<double>::infinity();
-	};
-
 	void Update(double const& data, StatsType type)override
 	{
-		if (m_staticTypes.contains(type))
+		UpdateStats(data, type);
+
+		if (type == StatsType::WindDirection)
 		{
-			UpdateStaticStats(data, type);
-			DisplayStaticStats(type);
-		}
-		else if (m_types.contains(type))
-		{
-			UpdateStats(data, type);
-			DisplayStats(type);
+			DisplayWindStats();
 		}
 		else
 		{
-			throw std::runtime_error("Passed unknown type");
+			DisplayStats(type);
 		}
 	}
 
 	void UpdateStats(double newValue, StatsType type)
 	{
-		Stats* stats = &m_statistics.at(type);
-
-		if (stats->min > newValue)
+		if (type == StatsType::WindDirection)
 		{
-			stats->min = newValue;
+			m_windStats.Update(newValue);
 		}
-		if (stats->max < newValue)
+		else
 		{
-			stats->max = newValue;
-		}
-		stats->sum += newValue;
-		++stats->countAccurance;
-	}
-
-	void UpdateStaticStats(double newValue, StatsType type)
-	{
-		StaticStats* stats = &m_staticStatistics.at(type);
-		stats->values[newValue]++;
-
-		if (!stats->values.contains(stats->maxEncounterKey)
-			|| stats->values.at(stats->maxEncounterKey) < stats->values.at(newValue))
-		{
-			stats->maxEncounterKey = newValue;
+			Stats* stats = &m_statistics.at(type);
+			stats->Update(newValue);
 		}
 	}
 
@@ -119,30 +158,27 @@ private:
 		const Stats& stats = m_statistics.at(type);
 		const std::string& displayName = STATS_DISPLAY_NAMES.at(type);
 
-		std::cout << "Max " + displayName + " " << stats.max << std::endl;
-		std::cout << "Min " + displayName + " " << stats.min << std::endl;
-		std::cout << "Average " + displayName + " " << (stats.sum / stats.countAccurance) << std::endl;
+		std::cout << "Max " + displayName + " " << stats.GetMax() << std::endl;
+		std::cout << "Min " + displayName + " " << stats.GetMin() << std::endl;
+		std::cout << "Average " + displayName + " " << (stats.GetSum() / stats.GetAccurenceCount())
+			<< std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 
-	void DisplayStaticStats(StatsType type)
+	void DisplayWindStats()
 	{
-		const StaticStats& stats = m_staticStatistics.at(type);
-		const std::string& displayName = STATS_DISPLAY_NAMES.at(type);
+		const std::string& displayName = STATS_DISPLAY_NAMES.at(StatsType::WindDirection);
 
-		std::cout << "Max " + displayName + " " << stats.values.rbegin()->first << std::endl;
-		std::cout << "Min " + displayName + " " << stats.values.begin()->first << std::endl;
-		std::cout << "Average " + displayName + " " << stats.maxEncounterKey << std::endl;
+		std::cout << "Average " + displayName + " " << m_windStats.GetAverageWindDirection()
+			<< std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 
-	const std::set<StatsType> m_staticTypes = { StatsType::WindDirection };
-	const std::set<StatsType> m_types = { 
+	const std::set<StatsType> m_types = {
 		StatsType::Temperature, StatsType::Humidity, StatsType::Pressure, StatsType::WindSpeed
 	};
-
 	std::map<StatsType, Stats> m_statistics;
-	std::map<StatsType, StaticStats> m_staticStatistics;
+	WindStats m_windStats;
 };
 
 class CWeatherData : public CObservable<double, StatsType>

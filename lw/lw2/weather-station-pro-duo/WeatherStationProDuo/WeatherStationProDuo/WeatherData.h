@@ -1,13 +1,14 @@
 #pragma once
 
 #include <iostream>
-#include <vector>
 #include <algorithm>
 #include <climits>
 #include <map>
 #include <set>
+#include <functional>
 
 #include "Observer.h"
+#include "Stats.h"
 
 enum class StatsType
 {
@@ -18,9 +19,42 @@ enum class StatsType
 	WindDirection,
 };
 
+namespace
+{
+	const std::map<StatsType, std::string> STATS_DISPLAY_NAMES = {
+		{StatsType::Temperature, "Temp"},
+		{StatsType::Humidity, "Humidity"},
+		{StatsType::Pressure, "Pressure"},
+		{StatsType::WindSpeed, "Wind speed"},
+		{StatsType::WindDirection, "Wind direction"},
+	};
+}
+
 class CWeatherData : public CObservable<CWeatherData>
 {
 public:
+	using Data = std::map<StatsType, std::function<double()>>;
+
+	enum class WeatherDataType
+	{
+		Indoor,
+		Outdoor,
+	};
+
+	void SetMeasurements(double temp, double humidity, double pressure)
+	{
+		m_humidity = humidity;
+		m_temperature = temp;
+		m_pressure = pressure;
+
+		NotifyObservers();
+	}
+
+	const Data& GetData()const
+	{
+		return m_stats;
+	}
+
 	double GetTemperature() const
 	{
 		return m_temperature;
@@ -36,40 +70,68 @@ public:
 		return m_pressure;
 	}
 
+	virtual WeatherDataType GetType()const = 0;
+
 protected:
+	CWeatherData(const Data& additionalStats = {})
+	{
+		m_stats.insert(additionalStats.begin(), additionalStats.end());
+	}
+
 	const CWeatherData* GetSubject() const override
 	{
 		return this;
-	}
-
-	void UpdateMeasurements(double temp, double humidity, double pressure)
-	{
-		m_humidity = humidity;
-		m_temperature = temp;
-		m_pressure = pressure;
-	}
-
-	void MeasurementsChanged()
-	{
-		NotifyObservers();
 	}
 
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
-	std::vector<StatsType> m_statsTypes = { StatsType::Humidity, StatsType ::Temperature, StatsType ::Pressure };
+	Data m_stats = {
+		{StatsType::Humidity, [&]() { return this->GetHumidity(); }},
+		{StatsType::Temperature, [&]() { return this->GetTemperature(); }},
+		{StatsType::Pressure, [&]() { return this->GetPressure(); }},
+	};
 };
 
 class COutsideWeatherData : public CWeatherData
 {
 public:
-	void SetMeasurements(double temp, double humidity, double pressure)
+	COutsideWeatherData()
+		: CWeatherData({
+			{StatsType::WindSpeed, [&]() { return this->GetWindSpeed(); }},
+			{StatsType::WindDirection, [&]() { return this->GetWindDirection(); }}
+		})
 	{
-		UpdateMeasurements(temp, humidity, pressure);
-
-		MeasurementsChanged();
 	}
+
+	void SetMeasurements(
+		double temp,
+		double humidity,
+		double pressure,
+		double windDirection,
+		double windSpeed)
+	{
+		m_windDirection = windDirection;
+		m_windSpeed = windSpeed;
+		CWeatherData::SetMeasurements(temp, humidity, pressure);
+	}
+
+	WeatherDataType GetType()const override
+	{
+		return  CWeatherData::WeatherDataType::Outdoor;
+	}
+
+	double GetWindDirection()
+	{
+		return m_windDirection;
+	}
+
+	double GetWindSpeed()
+	{
+		return m_windSpeed;
+	}
+
 private:
 	double m_windDirection = 0;
 	double m_windSpeed = 0;
@@ -80,9 +142,12 @@ class CIndoorWeatherData : public CWeatherData
 public:
 	void SetMeasurements(double temp, double humidity, double pressure)
 	{
-		UpdateMeasurements(temp, humidity, pressure);
+		CWeatherData::SetMeasurements(temp, humidity, pressure);
+	}
 
-		MeasurementsChanged();
+	WeatherDataType GetType()const override
+	{
+		return  CWeatherData::WeatherDataType::Indoor;
 	}
 };
 
@@ -91,18 +156,20 @@ class CDisplay : public IObserver<CWeatherData>
 private:
 	void Update(CWeatherData const& weatherData) override
 	{
-		if (auto indoorData = dynamic_cast<const CIndoorWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Indoor)
 		{
 			std::cout << "Indoor weather:" << std::endl;
 		}
-		if (auto ousideData = dynamic_cast<const COutsideWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Outdoor)
 		{
 			std::cout << "Outdoor weather:" << std::endl;
 		}
 
-		std::cout << "Current Temp " << weatherData.GetTemperature() << std::endl;
-		std::cout << "Current Hum " << weatherData.GetHumidity() << std::endl;
-		std::cout << "Current Pressure " << weatherData.GetPressure() << std::endl;
+		for (auto [statsType, getter] : weatherData.GetData())
+		{
+			std::cout << "Current " << STATS_DISPLAY_NAMES.at(statsType) << " " << getter()
+				<< std::endl;
+		}
 		std::cout << "----------------" << std::endl;
 	}
 };
@@ -112,107 +179,90 @@ class CStatsDisplay : public IObserver<CWeatherData>
 public:
 	CStatsDisplay()
 	{
-		for (const auto& [key, value] : m_statsDisplayNames) {
+		for (auto type : m_INDOOR_STATS) {
 			Stats stats;
-			m_statistics[key] = stats;
+			m_statistics[CWeatherData::WeatherDataType::Indoor][type] = stats;
+		}
+
+		for (auto type : m_OUTDOOR_STATS) {
+			Stats stats;
+			m_statistics[CWeatherData::WeatherDataType::Outdoor][type] = stats;
 		}
 	}
 
 private:
-	struct Stats
-	{
-		double min = std::numeric_limits<double>::infinity();
-		double max = -std::numeric_limits<double>::infinity();
-		double sum = 0;
-		unsigned countAccurance = 0;
-	};
-
-	struct StaticStats
-	{
-		std::map<double, unsigned int> values = {};
-		double maxEncounterKey = -std::numeric_limits<double>::infinity();
-	};
-
 	void Update(CWeatherData const& weatherData) override
 	{
-		UpdateStats(data.humidity, StatsType::Humidity);
-		UpdateStats(data.pressure, StatsType::Pressure);
-		UpdateStats(data.temperature, StatsType::Temperature);
-		UpdateStats(data.windSpeed, StatsType::WindSpeed);
-		UpdateStaticStats(data.windDirection, StaticStatsType::WindDirection);
-
-		DisplayStats(StatsType::Humidity);
-		DisplayStats(StatsType::Pressure);
-		DisplayStats(StatsType::Temperature);
-		DisplayStats(StatsType::WindSpeed);
-		DisplayStaticStats(StaticStatsType::WindDirection);
-	}
-
-	void UpdateStats(double newValue, StatsType type)
-	{
-		Stats* stats = &m_statistics.at(type);
-
-		if (stats->min > newValue)
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Indoor)
 		{
-			stats->min = newValue;
+			std::cout << "Indoor weather:" << std::endl;
 		}
-		if (stats->max < newValue)
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Outdoor)
 		{
-			stats->max = newValue;
-		}
-		stats->sum += newValue;
-		++stats->countAccurance;
-	}
-
-	void UpdateStaticStats(double newValue, StaticStatsType type)
-	{
-		if (!m_staticStatistics.contains(type))
-		{
-			m_staticStatistics[type] = {};
+			std::cout << "Outdoor weather:" << std::endl;
 		}
 
-		StaticStats* stats = &m_staticStatistics.at(type);
-		stats->values[newValue]++;
-
-		if (!stats->values.contains(stats->maxEncounterKey)
-			|| stats->values.at(stats->maxEncounterKey) < stats->values.at(newValue))
+		for (auto [statsType, getter] : weatherData.GetData())
 		{
-			stats->maxEncounterKey = newValue;
+			UpdateStats(getter(), statsType, weatherData.GetType());
 		}
-	}
 
-	void DisplayStats(StatsType type)
-	{
-		const Stats& stats = m_statistics.at(type);
-		const std::string& displayName = m_statsDisplayNames.at(type);
-
-		std::cout << "Max " + displayName + " " << stats.max << std::endl;
-		std::cout << "Min " + displayName + " " << stats.min << std::endl;
-		std::cout << "Average " + displayName + " " << (stats.sum / stats.countAccurance) << std::endl;
+		for (const auto& [statsType, stats] : m_statistics[weatherData.GetType()])
+		{
+			if (statsType == StatsType::WindDirection)
+			{
+				DisplayWindStats();
+			}
+			else
+			{
+				DisplayStats(weatherData.GetType(), statsType);
+			}
+		}
 		std::cout << "----------------" << std::endl;
 	}
 
-	void DisplayStaticStats(StaticStatsType type)
+	void UpdateStats(double newValue, StatsType statsType, CWeatherData::WeatherDataType dataType)
 	{
-		const StaticStats& stats = m_staticStatistics.at(type);
-		const std::string& displayName = m_staticStatsDisplayNames.at(type);
-
-		std::cout << "Max " + displayName + " " << stats.values.rbegin()->first << std::endl;
-		std::cout << "Min " + displayName + " " << stats.values.begin()->first << std::endl;
-		std::cout << "Average " + displayName + " " << stats.maxEncounterKey << std::endl;
-		std::cout << "----------------" << std::endl;
+		if (statsType == StatsType::WindDirection)
+		{
+			m_windStats.Update(newValue);
+		}
+		else
+		{
+			Stats* stats = &m_statistics.at(dataType).at(statsType);
+			stats->Update(newValue);
+		}
 	}
 
-	std::map<StatsType, Stats> m_statistics;
-	std::map<StatsType, std::string> m_statsDisplayNames = {
-		{StatsType::Temperature, "Temp"},
-		{StatsType::Humidity, "Humidity"},
-		{StatsType::Pressure, "Pressure"},
-		{StatsType::WindSpeed, "Wind speed"},
-	};
+	void DisplayStats(CWeatherData::WeatherDataType dataType, StatsType statsType)
+	{
+		const Stats& stats = m_statistics.at(dataType).at(statsType);
+		const std::string& displayName = STATS_DISPLAY_NAMES.at(statsType);
 
-	std::map<StaticStatsType, StaticStats> m_staticStatistics;
-	std::map<StaticStatsType, std::string> m_staticStatsDisplayNames = {
-		{StaticStatsType::WindDirection, "Wind direction"},
+		std::cout << "Max " + displayName + " " << stats.GetMax() << std::endl;
+		std::cout << "Min " + displayName + " " << stats.GetMin() << std::endl;
+		std::cout << "Average " + displayName + " " << (stats.GetSum() / stats.GetAccurenceCount())
+			<< std::endl << std::endl;
+	}
+
+	void DisplayWindStats()
+	{
+		const std::string& displayName = STATS_DISPLAY_NAMES.at(StatsType::WindDirection);
+
+		std::cout << "Average " + displayName + " " << m_windStats.GetAverageWindDirection()
+			<< std::endl;
+	}
+	
+	const std::set<StatsType> m_INDOOR_STATS = { 
+		StatsType::Humidity, StatsType::Pressure, StatsType::Temperature
 	};
+	const std::set<StatsType> m_OUTDOOR_STATS = {
+		StatsType::Humidity, 
+		StatsType::Pressure, 
+		StatsType::Temperature, 
+		StatsType::WindDirection, 
+		StatsType::WindSpeed,
+	};
+	std::map<CWeatherData::WeatherDataType, std::map<StatsType, Stats>> m_statistics;
+	WindStats m_windStats;
 };

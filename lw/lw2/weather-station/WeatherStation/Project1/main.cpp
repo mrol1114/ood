@@ -8,7 +8,7 @@ int main()
 	wd.RegisterObserver(display, 1);
 
 	CStatsDisplay statsDisplay;
-	wd.RegisterObserver(statsDisplay, 1);
+	wd.RegisterObserver(statsDisplay, 2);
 
 	wd.SetMeasurements(3, 0.7, 760);
 	wd.SetMeasurements(4, 0.8, 761);

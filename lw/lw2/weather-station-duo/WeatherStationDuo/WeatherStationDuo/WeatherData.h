@@ -7,10 +7,18 @@
 #include <map>
 
 #include "Observer.h"
-
+// пенести определение в observer 
 class CWeatherData : public CObservable<CWeatherData>
 {
 public:
+	enum class WeatherDataType
+	{
+		Indoor,
+		Outdoor,
+	};
+
+	virtual WeatherDataType GetType() const = 0;
+
 	double GetTemperature() const
 	{
 		return m_temperature;
@@ -54,12 +62,20 @@ private:
 
 class COutsideWeatherData : public CWeatherData
 {
-
+public:
+	WeatherDataType GetType()const override
+	{
+		return WeatherDataType::Outdoor;
+	}
 };
 
 class CIndoorWeatherData : public CWeatherData
 {
-
+public:
+	WeatherDataType GetType()const override
+	{
+		return WeatherDataType::Indoor;
+	}
 };
 
 class CDisplay : public IObserver<CWeatherData>
@@ -67,11 +83,11 @@ class CDisplay : public IObserver<CWeatherData>
 private:
 	void Update(CWeatherData const& weatherData) override
 	{
-		if (auto indoorData = dynamic_cast<const CIndoorWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Indoor)
 		{
 			std::cout << "Indoor weather:" << std::endl;
 		}
-		if (auto ousideData = dynamic_cast<const COutsideWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Outdoor)
 		{
 			std::cout << "Outdoor weather:" << std::endl;
 		}
@@ -112,11 +128,11 @@ private:
 
 	void Update(CWeatherData const& weatherData) override
 	{
-		if (auto indoorData = dynamic_cast<const CIndoorWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Indoor)
 		{
 			std::cout << "Indoor weather:" << std::endl;
 		}
-		if (auto ousideData = dynamic_cast<const COutsideWeatherData*>(&weatherData))
+		if (weatherData.GetType() == CWeatherData::WeatherDataType::Indoor)
 		{
 			std::cout << "Outside weather:" << std::endl;
 		}

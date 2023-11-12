@@ -38,7 +38,7 @@ private:
 	std::vector<CMockInOrder*>* m_vector;
 };
 
-SCENARIO("removing observer while notify")
+SCENARIO("removing observer while notifying")
 {
 	GIVEN("mock observer")
 	{
@@ -72,5 +72,26 @@ SCENARIO("notify in order")
 		REQUIRE(vector[0] == &observer2);
 		REQUIRE(vector[1] == &observer1);
 		REQUIRE(vector[2] == &observer3);
+	}
+}
+
+SCENARIO("deleting observer with same priority")
+{
+	GIVEN("2 observers with same priority")
+	{
+		CWeatherData wd;
+
+		std::vector<CMockInOrder*> vector;
+		CMockInOrder observer1(&vector);
+		CMockInOrder observer2(&vector);
+
+		wd.RegisterObserver(observer1, 1);
+		wd.RegisterObserver(observer2, 1);
+
+		wd.RemoveObserver(observer1);
+		wd.NotifyObservers();
+
+		REQUIRE(vector.size() == 1);
+		REQUIRE(vector[0] == &observer2);
 	}
 }

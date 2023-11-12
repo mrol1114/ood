@@ -8,6 +8,50 @@
 
 #include "Observer.h"
 
+class Stats
+{
+public:
+	void Update(double newValue)
+	{
+		if (m_min > newValue)
+		{
+			m_min = newValue;
+		}
+		if (m_max < newValue)
+		{
+			m_max = newValue;
+		}
+		m_sum += newValue;
+		m_accurenceCount++;
+	}
+
+	double GetMin()
+	{
+		return m_min;
+	}
+
+	double GetMax()
+	{
+		return m_max;
+	}
+
+	double GetSum()
+	{
+		return m_sum;
+	}
+
+	double GetAccurenceCount()
+	{
+		return m_accurenceCount;
+	}
+
+private:
+	double m_min = std::numeric_limits<double>::infinity();
+	double m_max = -std::numeric_limits<double>::infinity();
+	double m_sum = 0;
+	unsigned int m_accurenceCount = 0;
+};
+
 struct SWeatherInfo
 {
 	double temperature = 0;
@@ -27,7 +71,7 @@ private:
 	}
 };
 
-class CStatsDisplay : public IObserver<SWeatherInfo>
+class CStatsDisplay : public IObserver<SWeatherInfo> // вынести в класс stats
 {
 public:
 	CStatsDisplay()
@@ -46,14 +90,6 @@ private:
 		Pressure
 	};
 
-	struct Stats
-	{
-		double min = std::numeric_limits<double>::infinity();
-		double max = -std::numeric_limits<double>::infinity();
-		double sum = 0;
-		unsigned countAccurance = 0;
-	};
-
 	void Update(SWeatherInfo const& data) override
 	{
 		UpdateStats(data.humidity, StatsType::Humidity);
@@ -68,27 +104,17 @@ private:
 	void UpdateStats(double newValue, StatsType type)
 	{
 		Stats* stats = &m_statistics.at(type);
-
-		if (stats->min > newValue)
-		{
-			stats->min = newValue;
-		}
-		if (stats->max < newValue)
-		{
-			stats->max = newValue;
-		}
-		stats->sum += newValue;
-		++stats->countAccurance;
+		stats->Update(newValue);
 	}
 
 	void DisplayStats(StatsType type)
 	{
-		Stats stats = m_statistics.at(type);
+		Stats& stats = m_statistics.at(type);
 		std::string displayName = m_statsDisplayNames.at(type);
 
-		std::cout << "Max " + displayName + " " << stats.max << std::endl;
-		std::cout << "Min " + displayName + " " << stats.min << std::endl;
-		std::cout << "Average " + displayName + " " << (stats.sum / stats.countAccurance) << std::endl;
+		std::cout << "Max " + displayName + " " << stats.GetMax() << std::endl;
+		std::cout << "Min " + displayName + " " << stats.GetMin() << std::endl;
+		std::cout << "Average " + displayName + " " << (stats.GetSum() / stats.GetAccurenceCount()) << std::endl;
 		std::cout << "----------------" << std::endl;
 	}
 

@@ -45,18 +45,28 @@ private:
 		unsigned int m_priority;
 	};
 
+	using InsertIterator = std::multiset<ObserverWithPriority>::iterator;
+
 public:
 	void RegisterObserver(ObserverType& observer, unsigned int priority)override
 	{
-		if (m_observerToPriority.contains(&observer))
+		if (m_observerToPosition.contains(&observer))
 		{
 			throw std::runtime_error("Observer already registered!");
 		}
 		else
 		{
 			ObserverWithPriority observerWithPriority(&observer, priority);
-			m_observers.insert(observerWithPriority);
-			m_observerToPriority[&observer] = priority;
+			auto insertIterator = m_observers.insert(m_observers.end(), observerWithPriority);
+			try // неконсистентность данных при исключении, gsl::finally or boost::SCOPE_EXIT
+			{
+				m_observerToPosition[&observer] = insertIterator;
+			}
+			catch (std::exception& ex)
+			{
+				m_observers.erase(insertIterator);
+				throw ex;
+			}
 		}
 	}
 
@@ -64,7 +74,7 @@ public:
 	{
 		T data = GetChangedData();
 
-		std::multiset<ObserverWithPriority> observers = m_observers;
+		auto observers = m_observers;
 		for (auto& observerContainer : observers)
 		{
 			observerContainer.m_observer->Update(data);
@@ -73,14 +83,16 @@ public:
 
 	void RemoveObserver(ObserverType& observer)override
 	{
-		if (!m_observerToPriority.contains(&observer))
+		if (!m_observerToPosition.contains(&observer))
 		{
 			throw std::runtime_error("Can not remove observer which is not registered!");
 		}
 		else
 		{
-			m_observers.erase({ &observer, m_observerToPriority.at(&observer) });
-			m_observerToPriority.erase(&observer);
+			// удалит всех с указанным приоритетом
+			InsertIterator& it = m_observerToPosition.at(&observer);
+			m_observers.erase(it);
+			m_observerToPosition.erase(&observer);
 		}
 	}
 
@@ -89,5 +101,5 @@ protected:
 
 private:
 	std::multiset<ObserverWithPriority> m_observers;
-	std::map<ObserverType*, unsigned int> m_observerToPriority;
+	std::map<ObserverType*, InsertIterator> m_observerToPosition;
 };

@@ -42,26 +42,37 @@ private:
 		{
 		}
 
-		bool operator<(const ObserverWithPriority& other) const
+		bool operator<(const ObserverWithPriority& other)const
 		{
-			return m_priority < other.m_priority;
+			return m_priority > other.m_priority;
 		}
 
 		ObserverType* m_observer;
 		unsigned int m_priority;
 	};
 
+	using InsertIterator = std::multiset<ObserverWithPriority>::iterator;
+
 public:
-	void RegisterObserver(ObserverType& observer, unsigned int priority) override
+	void RegisterObserver(ObserverType& observer, unsigned int priority)override
 	{
-		if (m_observers.contains({ &observer, priority }))
+		if (m_observerToPosition.contains(&observer))
 		{
 			throw std::runtime_error("Observer already registered!");
 		}
 		else
 		{
-			m_observers.insert({ &observer, priority });
-			m_observerToPriority[&observer] = priority;
+			ObserverWithPriority observerWithPriority(&observer, priority);
+			auto insertIterator = m_observers.insert(m_observers.end(), observerWithPriority);
+			try
+			{
+				m_observerToPosition[&observer] = insertIterator;
+			}
+			catch (std::exception& ex)
+			{
+				m_observers.erase(insertIterator);
+				throw ex;
+			}
 		}
 	}
 
@@ -69,22 +80,24 @@ public:
 	{
 		auto subject = GetSubject();
 
-		for (auto& observerContainer : m_observers)
+		auto observers = m_observers;
+		for (auto& observerContainer : observers)
 		{
 			observerContainer.m_observer->Update(*subject);
 		}
 	}
 
-	void RemoveObserver(ObserverType& observer) override
+	void RemoveObserver(ObserverType& observer)override
 	{
-		if (!m_observers.contains({ &observer, m_observerToPriority.at(&observer) }))
+		if (!m_observerToPosition.contains(&observer))
 		{
 			throw std::runtime_error("Can not remove observer which is not registered!");
 		}
 		else
 		{
-			m_observers.erase({ &observer, m_observerToPriority.at(&observer) });
-			m_observerToPriority.erase(&observer);
+			InsertIterator& it = m_observerToPosition.at(&observer);
+			m_observers.erase(it);
+			m_observerToPosition.erase(&observer);
 		}
 	}
 
@@ -92,6 +105,6 @@ protected:
 	virtual const T* GetSubject() const = 0;
 
 private:
-	std::set<ObserverWithPriority> m_observers;
-	std::map<ObserverType*, unsigned int> m_observerToPriority;
+	std::multiset<ObserverWithPriority> m_observers;
+	std::map<ObserverType*, InsertIterator> m_observerToPosition;
 };
