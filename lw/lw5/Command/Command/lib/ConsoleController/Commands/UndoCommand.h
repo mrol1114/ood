@@ -1,17 +1,21 @@
 #pragma once
 
-#include "./ICommand.h"
+#include "../../Command/CConsoleCommand.h"
+#include "../../Document/IDocument.h"
 
-class UndoCommand : public ICommand
+class UndoCommand : public CConsoleCommand
 {
 public:
-	void Execute()override
+	UndoCommand(IDocumentPtr& document)
+		: m_document(document)
 	{
-
 	}
 
-	void Unexecute()override
+private:
+	void DoExecute()override
 	{
-
+		m_document->Undo();
 	}
+
+	IDocumentPtr m_document;
 };

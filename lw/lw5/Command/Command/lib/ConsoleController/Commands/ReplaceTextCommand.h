@@ -1,17 +1,29 @@
 #pragma once
 
-#include "./ICommand.h"
+#include "../../Command/CConsoleCommand.h"
+#include "../../Document/IDocument.h"
 
-class ReplaceTextCommand : public ICommand
+class ReplaceTextCommand : public CConsoleCommand
 {
 public:
-	void Execute()override
+	ReplaceTextCommand(std::istream& input, IDocumentPtr& document)
+		: m_input(input)
+		, m_document(document)
 	{
-
 	}
 
-	void Unexecute()override
+private:
+	void DoExecute()override
 	{
+		size_t index;
+		m_input >> index;
 
+		std::string text;
+		m_input >> text;
+
+		m_document->GetItem(index).GetParagraph()->SetText(text);
 	}
+
+	std::istream& m_input;
+	IDocumentPtr m_document;
 };

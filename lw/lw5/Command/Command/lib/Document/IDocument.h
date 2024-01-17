@@ -4,7 +4,7 @@
 #include <optional>
 #include <filesystem>
 
-#include "./DocumentItem/IDocumentItem.h"
+#include "./DocumentItem/CDocumentItem.h"
 
 /*
 Интерфейс документа
@@ -46,3 +46,5 @@ public:
     virtual void Save(const std::filesystem::path& path)const = 0;
     virtual ~IDocument() = default;
 };
+
+using IDocumentPtr = std::shared_ptr<IDocument>;

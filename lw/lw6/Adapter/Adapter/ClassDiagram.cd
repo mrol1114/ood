@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="graphics_lib::ICanvas" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphicsLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="graphics_lib::CCanvas" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphicsLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="graphics_lib_pro::ICanvas">
+    <Position X="7.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAEAAAgAAAAAAAA=</HashCode>
+      <FileName>GraphicsLibPro.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="graphics_lib_pro::CCanvas" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>GraphicsLibPro.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModernGraphicLibAdapter" Collapsed="true">
+    <Position X="0.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAECAAAAAAAAAAAQAAAAAAAAAIAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>ModernGraphicLibAdapter.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib::CPoint">
+    <Position X="6.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>ModernGraphicsLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib::CModernGraphicsRenderer">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAAAAAAAAQAAAABAAgAABAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ModernGraphicsLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib_pro::CPoint">
+    <Position X="9.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>ModernGraphicsLibPro.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib_pro::CRGBAColor">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAQABAAAAAAg=</HashCode>
+      <FileName>ModernGraphicsLibPro.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="modern_graphics_lib_pro::CModernGraphicsRenderer">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAAAAAAAAQAAAABAAgAABAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>ModernGraphicsLibPro.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::ICanvasDrawable">
+    <Position X="1.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShapeDrawingLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::CTriangle">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAOAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>ShapeDrawingLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::CRectangle">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAwABAAAAAAQAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>ShapeDrawingLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="shape_drawing_lib::CCanvasPainter">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAIAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ShapeDrawingLib.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="shape_drawing_lib::Point">
+    <Position X="7.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>ShapeDrawingLib.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

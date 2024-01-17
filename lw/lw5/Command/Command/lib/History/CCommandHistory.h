@@ -3,9 +3,9 @@
 #include <deque>
 #include <iostream>
 
-#include "../Command/ICommand.h"
+#include "./ICommandHistory.h"
 
-class CCommandHistory
+class CCommandHistory : public ICommandHistory
 {
 public:
 	bool CanUndo()
@@ -15,6 +15,7 @@ public:
 
 	bool CanRedo()
 	{
+		auto i = m_commands.size();
 		return m_nextCommandIndex < m_commands.size();
 	}
 
@@ -35,39 +36,60 @@ public:
 			throw std::logic_error("Command can not be redone");
 		}
 
-		m_commands[m_nextCommandIndex - 1]->Execute();
+		m_commands[m_nextCommandIndex]->Execute();
 		m_nextCommandIndex++;
 	}
 
-	void ExecuteAndAddCommand(ICommandPtr&& command)
+	void ExecuteAndAddCommand(IDocumentCommandPtr&& command)
 	{
-		m_commands.push_back(nullptr);
-
-		try
+		if (m_nextCommandIndex < m_commands.size())
 		{
 			command->Execute();
-			m_commands[m_commands.size() - 1] = std::move(command);
-		}
-		catch (std::exception& ex)
-		{
-			m_commands.pop_back();
-			throw ex;
-		}
+			for (size_t index = m_nextCommandIndex; index < m_commands.size(); index++)
+			{
 
-		if (m_commands.size() > m_MAXIMUM_HISTORY_SIZE)
+			}
+			m_commands.resize(++m_nextCommandIndex);
+			m_commands.back() = move(command);
+		}
+		else
 		{
-			m_commands.pop_front();
+			m_commands.emplace_back(nullptr);
+
+			try
+			{
+				command->Execute();
+				m_commands.back() = move(command); 
+				++m_nextCommandIndex;
+				if (m_commands.size() > m_MAXIMUM_HISTORY_SIZE)
+				{
+					DeleteCommand(0);
+					m_commands.pop_front();
+				}
+			}
+			catch (...)
+			{
+				m_commands.pop_back();
+				throw;
+			}
 		}
 	}
 
 private:
-	static const size_t m_MAXIMUM_HISTORY_SIZE = 10;
-
-	void ResizeCommandsToCurrentIndex()
+	void DeleteCommand(size_t index)
 	{
-		m_commands.resize(m_nextCommandIndex);
+		try
+		{
+			m_commands[index]->Delete();
+		}
+		catch (...)
+		{
+			// Do nothing
+		}
 	}
 
-	std::deque<ICommandPtr> m_commands;
+	static const size_t m_MAXIMUM_HISTORY_SIZE = 10;
+
+	std::deque<IDocumentCommandPtr> m_commands;
 	size_t m_nextCommandIndex = 0;
 };

@@ -134,10 +134,13 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\Command\CCommand.h" />
+    <ClInclude Include="lib\Command\CConsoleCommand.h" />
+    <ClInclude Include="lib\Command\CDocumentCommand.h" />
+    <ClInclude Include="lib\Command\IConsoleCommand.h" />
+    <ClInclude Include="lib\ConsoleController\Commands\ConsoleCommandType.h" />
     <ClInclude Include="lib\ConsoleController\Commands\DeleteItemCommand.h" />
     <ClInclude Include="lib\ConsoleController\Commands\HelpCommand.h" />
-    <ClInclude Include="lib\Command\ICommand.h" />
+    <ClInclude Include="lib\Command\IDocumentCommand.h" />
     <ClInclude Include="lib\ConsoleController\Commands\InsertImageCommand.h" />
     <ClInclude Include="lib\ConsoleController\Commands\InsertParagraphCommand.h" />
     <ClInclude Include="lib\ConsoleController\Commands\ListCommand.h" />
@@ -148,11 +151,13 @@
     <ClInclude Include="lib\ConsoleController\Commands\SetTitleCommand.h" />
     <ClInclude Include="lib\ConsoleController\Commands\UndoCommand.h" />
     <ClInclude Include="lib\ConsoleController\ConsoleController.h" />
-    <ClInclude Include="lib\ConsoleController\ConsoleControllerCommandsHistory.h" />
-    <ClInclude Include="lib\Document\CDocument.h" />
+    <ClInclude Include="lib\ConsoleController\ConsoleControllerItem.h" />
+    <ClInclude Include="lib\Document\CHtmlDocument.h" />
     <ClInclude Include="lib\Document\Commands\DeleteItemDocumentCommand.h" />
     <ClInclude Include="lib\Document\Commands\InsertImageDocumentCommand.h" />
     <ClInclude Include="lib\Document\Commands\InsertParagraphDocumentCommand.h" />
+    <ClInclude Include="lib\Document\Commands\ReplaceTextDocumentCommand.h" />
+    <ClInclude Include="lib\Document\Commands\ResizeImageDocumentCommand.h" />
     <ClInclude Include="lib\Document\Commands\SetTitleDocumentCommand.h" />
     <ClInclude Include="lib\Document\DocumentItem\CDocumentItem.h" />
     <ClInclude Include="lib\Document\DocumentItem\Image\CImage.h" />
@@ -162,6 +167,12 @@
     <ClInclude Include="lib\Document\IDocument.h" />
     <ClInclude Include="lib\History\CCommandHistory.h" />
     <ClInclude Include="lib\History\ICommandHistory.h" />
+    <ClInclude Include="lib\System\CFileSystemServices.h" />
+    <ClInclude Include="lib\System\IFileSystemServices.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

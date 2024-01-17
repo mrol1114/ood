@@ -1,17 +1,26 @@
 #pragma once
 
-#include "./ICommand.h"
+#include "../../Command/CConsoleCommand.h"
+#include "../../Document/IDocument.h"
 
-class DeleteItemCommand : public ICommand
+class DeleteItemCommand : public CConsoleCommand
 {
 public:
-	void Execute()override
+	DeleteItemCommand(std::istream& input, IDocumentPtr& document)
+		: m_input(input)
+		, m_document(document)
 	{
-
 	}
 
-	void Unexecute()override
+private:
+	void DoExecute()override
 	{
+		size_t index;
+		m_input >> index;
 
+		m_document->DeleteItem(index);
 	}
+
+	std::istream& m_input;
+	IDocumentPtr m_document;
 };

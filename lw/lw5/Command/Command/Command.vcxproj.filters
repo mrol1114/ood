@@ -23,7 +23,7 @@
     <ClInclude Include="lib\Document\IDocument.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Document\CDocument.h">
+    <ClInclude Include="lib\Document\CHtmlDocument.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\Document\DocumentItem\Image\IImage.h">
@@ -47,7 +47,7 @@
     <ClInclude Include="lib\Document\DocumentItem\CDocumentItem.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Command\ICommand.h">
+    <ClInclude Include="lib\Command\IDocumentCommand.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\ConsoleController\Commands\InsertParagraphCommand.h">
@@ -83,13 +83,10 @@
     <ClInclude Include="lib\ConsoleController\Commands\SaveCommand.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\Command\CCommand.h">
+    <ClInclude Include="lib\Command\CDocumentCommand.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\ConsoleController\ConsoleController.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\ConsoleController\ConsoleControllerCommandsHistory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="lib\Document\Commands\SetTitleDocumentCommand.h">
@@ -104,5 +101,33 @@
     <ClInclude Include="lib\Document\Commands\InsertParagraphDocumentCommand.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="lib\System\IFileSystemServices.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\System\CFileSystemServices.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Document\Commands\ResizeImageDocumentCommand.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Document\Commands\ReplaceTextDocumentCommand.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Command\IConsoleCommand.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Command\CConsoleCommand.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ConsoleController\Commands\ConsoleCommandType.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\ConsoleController\ConsoleControllerItem.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
 </Project>

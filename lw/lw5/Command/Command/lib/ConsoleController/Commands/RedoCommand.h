@@ -1,17 +1,21 @@
 #pragma once
 
-#include "./ICommand.h"
+#include "../../Command/CConsoleCommand.h"
+#include "../../Document/IDocument.h"
 
-class RedoCommand : public ICommand
+class RedoCommand : public CConsoleCommand
 {
 public:
-	void Execute()override
+	RedoCommand(IDocumentPtr& document)
+		: m_document(document)
 	{
-
 	}
 
-	void Unexecute()override
+private:
+	void DoExecute()override
 	{
-
+		m_document->Redo();
 	}
+
+	IDocumentPtr m_document;
 };

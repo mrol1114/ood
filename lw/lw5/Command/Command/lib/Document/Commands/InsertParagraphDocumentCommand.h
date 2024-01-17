@@ -5,18 +5,21 @@
 
 #include "../DocumentItem/CDocumentItem.h"
 #include "../DocumentItem/Paragraph/CParagraph.h"
-#include "../../Command/CCommand.h"
+#include "../../Command/CDocumentCommand.h"
+#include "../../History/ICommandHistory.h"
 
-class InsertParagraphDocumentCommand : public CCommand
+class InsertParagraphDocumentCommand : public CDocumentCommand
 {
 public:
 	InsertParagraphDocumentCommand(
-		const std::string& text, 
-		std::optional<size_t> position, 
-		std::list<CDocumentItem>& items)
+		const std::string& text,
+		std::list<CDocumentItem>& items,
+		ICommandHistory& history,
+		std::optional<size_t> position
+	)
 		: m_documentItems(items)
 		, m_itemPos(position)
-		, m_insertedItem(CDocumentItem{nullptr, std::make_unique<CParagraph>(text)})
+		, m_insertedItem(CDocumentItem{nullptr, std::make_unique<CParagraph>(text, history)})
 	{
 	}
 
@@ -32,21 +35,15 @@ private:
 		else
 		{
 			m_documentItems.push_back(m_insertedItem);
+			m_itemPos = m_documentItems.size() - 1;
 		}
 	}
 
 	void DoUnexecute()override
 	{
-		if (m_itemPos != std::nullopt)
-		{
-			auto it = m_documentItems.begin();
-			advance(it, m_itemPos.value());
-			m_documentItems.erase(it);
-		}
-		else
-		{
-			m_documentItems.pop_back();
-		}
+		auto it = m_documentItems.begin();
+		advance(it, m_itemPos.value());
+		m_documentItems.erase(it);
 	}
 
 	std::list<CDocumentItem>& m_documentItems;

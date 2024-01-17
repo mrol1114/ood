@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CConsoleCommand" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAACAAAIAAAAA=</HashCode>
+      <FileName>lib\Command\CConsoleCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDocumentCommand" Collapsed="true">
+    <Position X="5.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAQAAAgAAAAAAAAAAAAAACEAAIAAAAA=</HashCode>
+      <FileName>lib\Command\CDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IConsoleCommand" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lib\Command\IConsoleCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeleteItemCommand" Collapsed="true">
+    <Position X="17.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAIAAAAAAQACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\DeleteItemCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HelpCommand" Collapsed="true">
+    <Position X="21.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAAAAAAAAEAABCAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\HelpCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDocumentCommand" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lib\Command\IDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsertImageCommand" Collapsed="true">
+    <Position X="3.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAIAAAAAAACAAQACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\InsertImageCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsertParagraphCommand" Collapsed="true">
+    <Position X="8.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAQAAAAAAAAACAAQACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\InsertParagraphCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ListCommand">
+    <Position X="12.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAQAAAAAAAAAAEAAACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\ListCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RedoCommand" Collapsed="true">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAIAAAACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\RedoCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReplaceTextCommand" Collapsed="true">
+    <Position X="24" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAQAAAAAAAAAAAAQACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\ReplaceTextCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResizeImageCommand" Collapsed="true">
+    <Position X="1.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAAAAQAAAAAAAAAAAAQACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\ResizeImageCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveCommand" Collapsed="true">
+    <Position X="6" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQACAAAAAEAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\SaveCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetTitleCommand" Collapsed="true">
+    <Position X="10.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAQACgAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\SetTitleCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UndoCommand" Collapsed="true">
+    <Position X="15" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAIAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\Commands\UndoCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsoleController">
+    <Position X="26.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAEAAAAAEAAAAQEAAAABAAAAAAAAAABAAQAACA=</HashCode>
+      <FileName>lib\ConsoleController\ConsoleController.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CHtmlDocument" Collapsed="true">
+    <Position X="6.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQEIAERAADBkAAAQQAAAADAgAACQKAQEAAEBEAAAA=</HashCode>
+      <FileName>lib\Document\CHtmlDocument.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DeleteItemDocumentCommand" Collapsed="true">
+    <Position X="3" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAEAAAAAAAAAgAAAAAAIABAAIABCAAAAAAAAA=</HashCode>
+      <FileName>lib\Document\Commands\DeleteItemDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsertImageDocumentCommand" Collapsed="true">
+    <Position X="5.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAgAAAAAAAIQAABAAgEAAACABAAAAAAACAAAAAAABQ=</HashCode>
+      <FileName>lib\Document\Commands\InsertImageDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InsertParagraphDocumentCommand" Collapsed="true">
+    <Position X="7.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAAAAAAAgEAAAAAAAAAEAAACAAAAAAABA=</HashCode>
+      <FileName>lib\Document\Commands\InsertParagraphDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReplaceTextDocumentCommand" Collapsed="true">
+    <Position X="28.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAgAAAAAABAAAAgAACAAAAAAAgA=</HashCode>
+      <FileName>lib\Document\Commands\ReplaceTextDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResizeImageDocumentCommand" Collapsed="true">
+    <Position X="9.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIACAAAAAAAQAACAAAgAAAAAAQAgAAAAACAAAgAAAAA=</HashCode>
+      <FileName>lib\Document\Commands\ResizeImageDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetTitleDocumentCommand" Collapsed="true">
+    <Position X="0.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAIAAwAAAAAAAAAAAAAACAAAACAAAA=</HashCode>
+      <FileName>lib\Document\Commands\SetTitleDocumentCommand.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CConstDocumentItem" Collapsed="true">
+    <Position X="3.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gQAAAAIAAAAAAAAAAAAAAAAQAgABAAACAAEAAAAAAAA=</HashCode>
+      <FileName>lib\Document\DocumentItem\CDocumentItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CDocumentItem" Collapsed="true">
+    <Position X="3.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAEAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lib\Document\DocumentItem\CDocumentItem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CImage" Collapsed="true">
+    <Position X="0.5" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQABAAAAAAAABAIAAAABAAAACCACAAAAAAEEBAAA=</HashCode>
+      <FileName>lib\Document\DocumentItem\Image\CImage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IImage" Collapsed="true">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAEAACAAAAAAAAAEEAAAA=</HashCode>
+      <FileName>lib\Document\DocumentItem\Image\IImage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CParagraph" Collapsed="true">
+    <Position X="9.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAIAIAAAAAAAAAACAAAAACAAAAAAAA=</HashCode>
+      <FileName>lib\Document\DocumentItem\Paragraph\CParagraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IParagraph" Collapsed="true">
+    <Position X="9.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAIAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>lib\Document\DocumentItem\Paragraph\IParagraph.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IDocument" Collapsed="true">
+    <Position X="6.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEIAERAAABkAAAQAAAAABAAAAAAAAAAAAEAMAAAA=</HashCode>
+      <FileName>lib\Document\IDocument.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CCommandHistory" Collapsed="true">
+    <Position X="3.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACgBAAABAAAAAAAAAABAAAAAAAgAAAAAAEABAA=</HashCode>
+      <FileName>lib\History\CCommandHistory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ICommandHistory" Collapsed="true">
+    <Position X="3.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAACABAAABAAAAAAAAAABAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>lib\History\ICommandHistory.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CFileSystemServices" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAgAAAAACAEAAAAAAAAAAA=</HashCode>
+      <FileName>lib\System\CFileSystemServices.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IFileSystemServices" Collapsed="true">
+    <Position X="0.5" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAgAAAAACAEAAAAAAAAABA=</HashCode>
+      <FileName>lib\System\IFileSystemServices.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="ConsoleControllerItem">
+    <Position X="26.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>lib\ConsoleController\ConsoleControllerItem.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ConsoleCommandType" Collapsed="true">
+    <Position X="26.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEIAEAAAIBAAAAQBAAAABAAAAAAAAAAAAEAAIAAI=</HashCode>
+      <FileName>lib\ConsoleController\Commands\ConsoleCommandType.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

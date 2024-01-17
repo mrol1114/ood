@@ -59,7 +59,7 @@ class CDocumentItem : public CConstDocumentItem
 {
 public:
 	CDocumentItem(IImagePtr image, IParagraphPtr paragraph)
-		: CConstDocumentItem(std::move(image), paragraph)
+		: CConstDocumentItem(std::move(image), std::move(paragraph))
 	{
 
 	}

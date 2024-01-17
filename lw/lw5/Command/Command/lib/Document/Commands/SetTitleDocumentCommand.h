@@ -2,9 +2,9 @@
 
 #include <string>
 
-#include "../../Command/CCommand.h"
+#include "../../Command/CDocumentCommand.h"
 
-class SetTitleDocumentCommand : public CCommand
+class SetTitleDocumentCommand : public CDocumentCommand
 {
 public:
 	SetTitleDocumentCommand(std::string& title, const std::string& newTitleValue)
