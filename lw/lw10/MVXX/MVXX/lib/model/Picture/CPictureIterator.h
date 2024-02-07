@@ -9,31 +9,13 @@
 class CPictureIterator
 {
 public:
-	CPictureIterator(std::list<std::shared_ptr<IShape>>& shapes)
-		: m_curr(shapes.begin())
-		, m_end(shapes.end())
-	{
-	}
+	CPictureIterator(std::list<std::shared_ptr<IShape>>& shapes);
 
-	bool HasNext()const
-	{
-		return m_curr != m_end;
-	}
+	bool HasNext()const;
 
-	std::shared_ptr<IShape>& Get()const
-	{
-		return *m_curr;
-	}
+	std::shared_ptr<IShape>& Get()const;
 
-	void Next()
-	{
-		if (m_curr == m_end)
-		{
-			throw std::runtime_error("Iterator exceeds boudaries");
-		}
-
-		m_curr++;
-	}
+	void Next();
 
 private:
 	std::list<std::shared_ptr<IShape>>::iterator m_curr;

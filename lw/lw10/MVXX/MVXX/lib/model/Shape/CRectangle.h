@@ -5,19 +5,9 @@
 class CRectangle : public CShape
 {
 public:
-	CRectangle(CFrame frame, ICommandHistory& history)
-		: CShape(frame, history)
-	{
-	}
+	CRectangle(CFrame frame);
 
-	ShapeType GetType()const override
-	{
-		return ShapeType::Rectangle;
-	}
+	ShapeType GetType()const override;
 
-	bool IsShapeIncludePoint(double x, double y)const override
-	{
-		return m_frame.GetLeft() <= x && m_frame.GetLeft() + m_frame.GetWidth() >= x
-			&& m_frame.GetTop() <= y && m_frame.GetTop() + m_frame.GetHeight() >= y;
-	}
+	bool IsShapeIncludePoint(double x, double y)const override;
 };

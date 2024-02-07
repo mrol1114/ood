@@ -15,129 +15,108 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="App.h">
+    <ClCompile Include="tests.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\view\CPictureView.cpp">
+    <ClCompile Include="..\MVXX\lib\presenter\CPicturePresenter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\view\Canvas\CCanvas.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Workboard\CKeyPoint.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\presenter\CPicturePresenter.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Workboard\CWorkboard.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Workboard\CWorkboard.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Shape\CEllipse.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Workboard\CKeyPoint.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Shape\CFrame.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Picture\CPicture.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Shape\CRectangle.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Picture\CPictureIterator.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Shape\CShape.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Shape\Factory\CShapeFactory.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Shape\CTriangle.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Shape\CEllipse.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Shape\Factory\CShapeFactory.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Shape\CFrame.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Picture\CPicture.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="lib\model\Shape\CRectangle.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\model\Shape\CShape.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\model\Shape\CTriangle.cpp">
+    <ClCompile Include="..\MVXX\lib\model\Picture\CPictureIterator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\model\Picture\CPictureIterator.h">
+    <ClInclude Include="..\MVXX\lib\view\IPictureView.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Picture\IPicture.h">
+    <ClInclude Include="..\MVXX\lib\view\Shapes.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Picture\CPicture.h">
+    <ClInclude Include="..\MVXX\lib\presenter\CPicturePresenter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\CEllipse.h">
+    <ClInclude Include="..\MVXX\lib\presenter\IPicturePresenter.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\CFrame.h">
+    <ClInclude Include="..\MVXX\lib\model\Workboard\CKeyPoint.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\CRectangle.h">
+    <ClInclude Include="..\MVXX\lib\model\Workboard\CWorkboard.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\CShape.h">
+    <ClInclude Include="..\MVXX\lib\model\Workboard\IWorkboard.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\CTriangle.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\CEllipse.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\IShape.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\CFrame.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\ShapeType.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\CRectangle.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Shape\Factory\CShapeFactory.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\CShape.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\view\CPictureView.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\CTriangle.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\presenter\CPicturePresenter.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\IShape.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\view\Canvas\CCanvas.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\ShapeType.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\view\Canvas\CanvasShape\CCanvasFrame.h">
+    <ClInclude Include="..\MVXX\lib\model\Shape\Factory\CShapeFactory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\view\Canvas\CanvasShape\CCanvasShapeType.h">
+    <ClInclude Include="..\MVXX\lib\model\Picture\CPicture.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\view\Canvas\CanvasShape\CCanvasShape.h">
+    <ClInclude Include="..\MVXX\lib\model\Picture\CPictureIterator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\view\IPictureView.h">
+    <ClInclude Include="..\MVXX\lib\model\Picture\CPictureMemento.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\presenter\IPicturePresenter.h">
+    <ClInclude Include="..\MVXX\lib\model\Picture\IPicture.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Workboard\CWorkboard.h">
+    <ClInclude Include="..\MVXX\lib\model\History\CHistory.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Workboard\IWorkboard.h">
+    <ClInclude Include="..\MVXX\lib\model\History\IMemento.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="lib\model\Workboard\CKeyPoint.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\view\Shapes.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\model\History\IOriginator.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\model\History\IMemento.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\model\History\CHistory.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\model\Picture\CPictureMemento.h">
+    <ClInclude Include="..\MVXX\lib\model\History\IOriginator.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

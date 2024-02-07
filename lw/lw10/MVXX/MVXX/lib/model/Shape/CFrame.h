@@ -5,44 +5,18 @@
 class CFrame
 {
 public:
-	CFrame(double left = 0, double top = 0, double width = 0, double height = 0)
-		: m_left(left)
-		, m_top(top)
-		, m_width(width)
-		, m_height(height)
-	{
-		EnsurePassedParamNotNegative(width);
-		EnsurePassedParamNotNegative(height);
-	}
+	CFrame(double left = 0, double top = 0, double width = 0, double height = 0);
 
-	double GetLeft()const
-	{
-		return m_left;
-	}
+	double GetLeft()const;
 
-	double GetTop()const
-	{
-		return m_top;
-	}
+	double GetTop()const;
 
-	double GetWidth()const
-	{
-		return m_width;
-	}
+	double GetWidth()const;
 
-	double GetHeight()const
-	{
-		return m_height;
-	}
+	double GetHeight()const;
 
 private:
-	static void EnsurePassedParamNotNegative(double value)
-	{
-		if (value < 0)
-		{
-			throw std::runtime_error("Passed frame param must not be negative");
-		}
-	}
+	static void EnsurePassedParamNotNegative(double value);
 
 	double m_left;
 	double m_top;

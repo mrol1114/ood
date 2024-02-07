@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{28057739-a4f9-4ffb-8ad2-19a20e65943e}</ProjectGuid>
-    <RootNamespace>GraphicsLib</RootNamespace>
+    <ProjectGuid>{7bc026e0-a807-43db-91c6-1d5120616741}</ProjectGuid>
+    <RootNamespace>MVXXtests</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,27 +70,17 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\projects\ood\lib\wxwidjets\lib\vc_x64_lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>C:\projects\ood\lib\wxwidjets\lib\vc_x64_lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_DYNAMIC;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\projects\ood\lib\wxwidjets\include;C:\projects\ood\lib\SFML-2.6.1\include;C:\projects\ood\lib\wxwidjets\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\projects\ood\lib\wxwidjets\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,36 +89,28 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_DYNAMIC;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\projects\ood\lib\wxwidjets\include;C:\projects\ood\lib\SFML-2.6.1\include;C:\projects\ood\lib\wxwidjets\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\projects\ood\lib\wxwidjets\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_DYNAMIC;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\projects\ood\lib\wxwidjets\include;C:\projects\ood\lib\SFML-2.6.1\include;C:\projects\ood\lib\wxwidjets\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\projects\ood\lib\wxwidjets\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,39 +119,54 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>SFML_DYNAMIC;</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\projects\ood\lib\wxwidjets\include;C:\projects\ood\lib\SFML-2.6.1\include;C:\projects\ood\lib\wxwidjets\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\projects\ood\lib\wxwidjets\lib\vc_x64_lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-audio.lib;sfml-system.lib;sfml-main.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="lib\controller\SlideController.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Picture\CPicture.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Picture\CPictureIterator.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Shape\CEllipse.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Shape\CFrame.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Shape\CRectangle.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Shape\CShape.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Shape\CTriangle.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Shape\Factory\CShapeFactory.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Workboard\CKeyPoint.cpp" />
+    <ClCompile Include="..\MVXX\lib\model\Workboard\CWorkboard.cpp" />
+    <ClCompile Include="..\MVXX\lib\presenter\CPicturePresenter.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\controller\SlideController.h" />
-    <ClInclude Include="lib\model\Picture\CPictureIterator.h" />
-    <ClInclude Include="lib\model\Picture\IPicture.h" />
-    <ClInclude Include="lib\model\Shape\CEllipse.h" />
-    <ClInclude Include="lib\model\Shape\CFrame.h" />
-    <ClInclude Include="lib\model\Shape\CRectangle.h" />
-    <ClInclude Include="lib\model\Shape\CTriangle.h" />
-    <ClInclude Include="lib\model\Shape\Factory\IShapeFactory.h" />
-    <ClInclude Include="lib\model\Shape\IShape.h" />
-    <ClInclude Include="lib\model\Shape\CShape.h" />
-    <ClInclude Include="lib\model\Shape\Factory\CShapeFactory.h" />
-    <ClInclude Include="lib\model\Shape\ShapeType.h" />
-    <ClInclude Include="lib\model\Picture\Picture.h" />
+    <ClInclude Include="..\MVXX\lib\model\History\CHistory.h" />
+    <ClInclude Include="..\MVXX\lib\model\History\IMemento.h" />
+    <ClInclude Include="..\MVXX\lib\model\History\IOriginator.h" />
+    <ClInclude Include="..\MVXX\lib\model\Picture\CPicture.h" />
+    <ClInclude Include="..\MVXX\lib\model\Picture\CPictureIterator.h" />
+    <ClInclude Include="..\MVXX\lib\model\Picture\CPictureMemento.h" />
+    <ClInclude Include="..\MVXX\lib\model\Picture\IPicture.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\CEllipse.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\CFrame.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\CRectangle.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\CShape.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\CTriangle.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\Factory\CShapeFactory.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\IShape.h" />
+    <ClInclude Include="..\MVXX\lib\model\Shape\ShapeType.h" />
+    <ClInclude Include="..\MVXX\lib\model\Workboard\CKeyPoint.h" />
+    <ClInclude Include="..\MVXX\lib\model\Workboard\CWorkboard.h" />
+    <ClInclude Include="..\MVXX\lib\model\Workboard\IWorkboard.h" />
+    <ClInclude Include="..\MVXX\lib\presenter\CPicturePresenter.h" />
+    <ClInclude Include="..\MVXX\lib\presenter\IPicturePresenter.h" />
+    <ClInclude Include="..\MVXX\lib\view\IPictureView.h" />
+    <ClInclude Include="..\MVXX\lib\view\Shapes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

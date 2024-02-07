@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <vector>
+#include <list>
 
 struct Shape
 {
@@ -23,6 +23,6 @@ struct Shape
 
 struct Shapes
 {
-	std::vector<Shape> shapes = {};
+	std::list<Shape> shapes = {};
 	Shape* currShape = nullptr;
 };

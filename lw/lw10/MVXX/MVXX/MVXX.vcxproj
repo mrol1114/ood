@@ -76,7 +76,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>C:\projects\ood\lib\wxwidjets\include;C:\projects\ood\lib\wxwidjets\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -92,7 +92,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
       <AdditionalIncludeDirectories>C:\projects\ood\lib\wxwidjets\include;C:\projects\ood\lib\wxwidjets\include\msvc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -108,7 +108,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -123,7 +123,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -134,18 +134,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.h" />
+    <ClCompile Include="lib\model\Picture\CPicture.cpp" />
+    <ClCompile Include="lib\model\Picture\CPictureIterator.cpp" />
+    <ClCompile Include="lib\model\Shape\CEllipse.cpp" />
+    <ClCompile Include="lib\model\Shape\CFrame.cpp" />
+    <ClCompile Include="lib\model\Shape\CRectangle.cpp" />
+    <ClCompile Include="lib\model\Shape\CShape.cpp" />
+    <ClCompile Include="lib\model\Shape\CTriangle.cpp" />
+    <ClCompile Include="lib\model\Shape\Factory\CShapeFactory.cpp" />
+    <ClCompile Include="lib\model\Workboard\CWorkboard.cpp" />
+    <ClCompile Include="lib\model\Workboard\CKeyPoint.cpp" />
+    <ClCompile Include="lib\presenter\CPicturePresenter.cpp" />
+    <ClCompile Include="lib\view\Canvas\CCanvas.cpp" />
+    <ClCompile Include="lib\view\CPictureView.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lib\controller\CPictureController.h" />
-    <ClInclude Include="lib\controller\IPictureController.h" />
-    <ClInclude Include="lib\model\Command\CCommand.h" />
-    <ClInclude Include="lib\model\Command\ICommand.h" />
-    <ClInclude Include="lib\model\History\CCommandHistory.h" />
-    <ClInclude Include="lib\model\History\ICommandHistory.h" />
-    <ClInclude Include="lib\model\Picture\Command\AddShapeCommand.h" />
-    <ClInclude Include="lib\model\Picture\Command\PictureCommandType.h" />
-    <ClInclude Include="lib\model\Picture\Command\SetCurrShapeCommand.h" />
-    <ClInclude Include="lib\model\Picture\Command\SetShapeFrameCommand.h" />
+    <ClInclude Include="lib\model\History\CHistory.h" />
+    <ClInclude Include="lib\model\History\IMemento.h" />
+    <ClInclude Include="lib\model\History\IOriginator.h" />
+    <ClInclude Include="lib\model\Picture\CPictureMemento.h" />
+    <ClInclude Include="lib\presenter\CPicturePresenter.h" />
+    <ClInclude Include="lib\presenter\IPicturePresenter.h" />
     <ClInclude Include="lib\model\Picture\CPicture.h" />
     <ClInclude Include="lib\model\Picture\CPictureIterator.h" />
     <ClInclude Include="lib\model\Picture\IPicture.h" />
@@ -159,7 +168,7 @@
     <ClInclude Include="lib\model\Shape\ShapeType.h" />
     <ClInclude Include="lib\model\Workboard\CWorkboard.h" />
     <ClInclude Include="lib\model\Workboard\IWorkboard.h" />
-    <ClInclude Include="lib\model\Workboard\KeyPoint.h" />
+    <ClInclude Include="lib\model\Workboard\CKeyPoint.h" />
     <ClInclude Include="lib\view\Canvas\CanvasShape\CCanvasFrame.h" />
     <ClInclude Include="lib\view\Canvas\CanvasShape\CCanvasShape.h" />
     <ClInclude Include="lib\view\Canvas\CanvasShape\CCanvasShapeType.h" />
