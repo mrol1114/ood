@@ -1,5 +1,7 @@
 #define CATCH_CONFIG_MAIN
-#include "../../../../../../lib/catch.hpp"
+#include "../../../../lib/catch.hpp"
+#include <boost/test/unit_test.hpp>
+#include <fakeit/boost/fakeit.hpp>
 
 #include <vector>
 
@@ -8,53 +10,16 @@
 #include "../Command/lib/System/IFileSystemServices.h"
 #include "../Command/lib/Document/CHtmlDocument.h"
 
-class MockFileSystem : public IFileSystemServices
+class SpyCommand : public CDocumentCommand
 {
 public:
-	MockFileSystem(std::shared_ptr<std::vector<std::string>> executedCommands)
-		: m_executedCommands(executedCommands)
-	{
-	}
-
-	void CreateDirectoryIfNotExists(const std::string& directoryName)override
-	{
-		m_executedCommands->push_back("CreateDirectoryIfNotExists " + directoryName);
-	}
-
-	void CopyFileByPath(
-		const std::filesystem::path& fromPath,
-		const std::filesystem::path& toPath
-	)override
-	{
-		m_executedCommands->push_back("CopyFile " + fromPath.string() + " " + toPath.string());
-	}
-
-	void DeleteFileByPath(
-		const std::filesystem::path& pathToFile
-	)override
-	{
-		m_executedCommands->push_back("DeleteFile " + pathToFile.string());
-	}
-
-	void WriteToFile(const std::filesystem::path& path, const std::string& text)override
-	{
-		m_executedCommands->push_back("WriteToFile " + path.string() + " " + text);
-	}
-
-private:
-	std::shared_ptr<std::vector<std::string>> m_executedCommands;
-};
-
-class MockCommand : public CDocumentCommand
-{
-public:
-	MockCommand(std::shared_ptr<std::vector<std::string>> array, unsigned int index)
+	SpyCommand(std::shared_ptr<std::vector<std::string>> array, unsigned int index)
 		: m_array(array)
 		, m_index(index)
 	{
 	}
 
-	~MockCommand()
+	~SpyCommand()
 	{
 		m_array->push_back("delete" + std::to_string(m_index));
 	}
@@ -77,6 +42,7 @@ private:
 SCENARIO("initializing image")
 {
 	CCommandHistory history;
+
 	WHEN("initializing with width and height in interval(1, 10000)")
 	{
 		CImage image("images/adwa", 100, 500, history);
@@ -130,8 +96,8 @@ SCENARIO("testing history")
 
 		WHEN("adding Commands")
 		{
-			history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 1));
-			history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 2));
+			history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 1));
+			history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 2));
 
 			REQUIRE(array->size() == 2);
 			REQUIRE(array->at(0) == "execute1");
@@ -141,9 +107,9 @@ SCENARIO("testing history")
 
 	GIVEN("history with 3 mock unexecuted commands")
 	{
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 1));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 2));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 3));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 1));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 2));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 3));
 
 		REQUIRE(!history.CanRedo());
 		REQUIRE(history.CanUndo());
@@ -165,7 +131,7 @@ SCENARIO("testing history")
 		WHEN("adding command after undo")
 		{
 			history.Undo();
-			history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 4));
+			history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 4));
 
 			REQUIRE(array->at(4) == "execute4");
 			REQUIRE(array->at(5) == "delete3");
@@ -177,9 +143,9 @@ SCENARIO("testing history")
 
 	GIVEN("history with 3 mock executed  commands")
 	{
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 1));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 2));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 3));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 1));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 2));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 3));
 
 		history.Undo();
 		history.Undo();
@@ -202,23 +168,23 @@ SCENARIO("testing history")
 
 	GIVEN("history with maximum number of commands")
 	{
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 1));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 2));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 3));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 4));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 5));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 6));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 7));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 8));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 9));
-		history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 10));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 1));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 2));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 3));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 4));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 5));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 6));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 7));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 8));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 9));
+		history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 10));
 
 		REQUIRE(!history.CanRedo());
 		REQUIRE(history.CanUndo());
 
 		WHEN("adding new command")
 		{
-			history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 11));
+			history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 11));
 
 			REQUIRE(array->at(10) == "execute11");
 			REQUIRE(array->at(11) == "delete1");
@@ -228,7 +194,7 @@ SCENARIO("testing history")
 		{
 			history.Undo();
 			history.Undo();
-			history.ExecuteAndAddCommand(std::make_unique<MockCommand>(array, 11));
+			history.ExecuteAndAddCommand(std::make_unique<SpyCommand>(array, 11));
 
 			REQUIRE(array->at(12) == "execute11");
 			REQUIRE(array->at(13) == "delete10");
@@ -237,70 +203,147 @@ SCENARIO("testing history")
 	}
 }
 
+// выводить сообщение об ошибке
 SCENARIO("executing document commands")
 {
-	std::shared_ptr<std::vector<std::string>> executedFileSystemCommands 
-		= std::make_shared<std::vector<std::string>>();
-	IFileSystemServicesPtr fileSystemServices 
-		= std::make_shared<MockFileSystem>(executedFileSystemCommands);
-	CHtmlDocument document(fileSystemServices);
+	fakeit::Mock<IFileSystemServices> fileSystemServices;
+	fakeit::Fake(Dtor(fileSystemServices));
 
-	GIVEN("empty document")
+	CHtmlDocument document(std::shared_ptr<IFileSystemServices>(&fileSystemServices.get()));
+
+	fakeit::Fake(Method(fileSystemServices, CreateDirectoryIfNotExists));
+	fakeit::Fake(Method(fileSystemServices, CopyFileByPath));
+	fakeit::Fake(Method(fileSystemServices, WriteToFile));
+
+	WHEN("insert paragraph outside of boundaries")
 	{
-		WHEN("inserting image")
-		{
-			document.InsertImage("folder/recent/r.png", 200, 300);
+		REQUIRE_THROWS(document.InsertParagraph("new world", 1));
+	}
 
-			REQUIRE(document.GetItemsCount() == 1);
-			REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
-			REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
-			REQUIRE(document.GetItem(0).GetImage()->GetPath().filename() != "r");
-			REQUIRE(document.GetItem(0).GetImage()->GetPath().extension() == ".png");
-			REQUIRE(document.GetItem(0).GetImage()->GetPath().parent_path() == "images");
-			REQUIRE(executedFileSystemCommands->size() == 2);
-			REQUIRE(executedFileSystemCommands->at(0) == "CreateDirectoryIfNotExists images");
-			REQUIRE(executedFileSystemCommands->at(1) 
-				== "CopyFile folder/recent/r.png " 
-				+ document.GetItem(0).GetImage()->GetPath().string());
+	WHEN("insert image outside of boundaries")
+	{
+		REQUIRE_THROWS(document.InsertImage("folder/recent/r.png", 200, 300, 1));
+	}
 
-			document.Undo();
-			REQUIRE(document.GetItemsCount() == 0);
-			REQUIRE_THROWS(document.GetItem(0));
-			REQUIRE(executedFileSystemCommands->size() == 2);
-		}
+	WHEN("insert image")
+	{
+		document.InsertImage("folder/recent/r.png", 200, 300);
 
-		WHEN("inserting paragraph")
-		{
-			document.InsertParagraph("new world");
-			REQUIRE(document.GetItemsCount() == 1);
-			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
+		REQUIRE(document.CanUndo());
+		REQUIRE(document.GetItemsCount() == 1);
+		REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
+		REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
+		REQUIRE(document.GetItem(0).GetImage()->GetPath().filename() != "r");
+		REQUIRE(document.GetItem(0).GetImage()->GetPath().extension() == ".png");
+		REQUIRE(document.GetItem(0).GetImage()->GetPath().parent_path() == "images");
 
-			document.Undo();
-			REQUIRE(document.GetItemsCount() == 0);
-			REQUIRE_THROWS(document.GetItem(0));
-		}
+		REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, CreateDirectoryIfNotExists).Using("images")));
+		REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, CopyFileByPath).Using(
+			"folder/recent/r.png",
+			document.GetItem(0).GetImage()->GetPath().string()
+		)));
+	}
 
-		WHEN("setting title")
-		{
-			document.SetTitle("new");
-			REQUIRE(document.GetTitle() == "new");
+	WHEN("undo insert image")
+	{
+		document.InsertImage("folder/recent/r.png", 200, 300);
 
-			document.Undo();
-			REQUIRE(document.GetTitle() == "");
-		}
+		document.Undo();
+
+		REQUIRE(document.CanRedo());
+		REQUIRE(document.GetItemsCount() == 0);
+		REQUIRE_THROWS(document.GetItem(0));
+	}
+
+	WHEN("redo insert image")
+	{
+		document.InsertImage("folder/recent/r.png", 200, 300);
+
+		document.Undo();
+		document.Redo();
+
+		REQUIRE(document.GetItemsCount() == 1);
+		REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
+		REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
+		REQUIRE(document.GetItem(0).GetImage()->GetPath().filename() != "r");
+		REQUIRE(document.GetItem(0).GetImage()->GetPath().extension() == ".png");
+		REQUIRE(document.GetItem(0).GetImage()->GetPath().parent_path() == "images");
+	}
+
+	WHEN("insert paragraph")
+	{
+		document.InsertParagraph("new world");
+
+		REQUIRE(document.GetItemsCount() == 1);
+		REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
+	}
+
+	WHEN("undo insert paragraph")
+	{
+		document.InsertParagraph("new world");
+
+		document.Undo();
+			
+		REQUIRE(document.CanRedo());
+		REQUIRE(document.GetItemsCount() == 0);
+		REQUIRE_THROWS(document.GetItem(0));
+	}
+
+	WHEN("redo insert paragraph")
+	{
+		document.InsertParagraph("new world");
+
+		document.Undo();
+		document.Redo();
+
+		REQUIRE(document.GetItemsCount() == 1);
+		REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
+	}
+
+	WHEN("set title")
+	{
+		document.SetTitle("new");
+
+		REQUIRE(document.GetTitle() == "new");
+	}
+
+	WHEN("undo set title")
+	{
+		document.SetTitle("new");
+
+		document.Undo();
+
+		REQUIRE(document.CanRedo());
+		REQUIRE(document.GetTitle() == "");
+	}
+
+	WHEN("set title")
+	{
+		document.SetTitle("new");
+
+		document.Undo();
+		document.Redo();
+
+		REQUIRE(document.GetTitle() == "new");
 	}
 
 	GIVEN("a document with image")
 	{
 		document.InsertImage("folder/recent/r.png", 200, 300);
 
-		WHEN("resizing image")
+		WHEN("resize image")
 		{
 			document.GetItem(0).GetImage()->Resize(150, 900);
 			REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 150);
 			REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 900);
+		}
+
+		WHEN("undo resize image")
+		{
+			document.GetItem(0).GetImage()->Resize(150, 900);
 
 			document.Undo();
+
 			REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
 			REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
 		}
@@ -310,12 +353,19 @@ SCENARIO("executing document commands")
 	{
 		document.InsertParagraph("new world");
 
-		WHEN("replacing text")
+		WHEN("replace text")
 		{
 			document.GetItem(0).GetParagraph()->SetText("old world");
+
 			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "old world");
+		}
+
+		WHEN("replace text")
+		{
+			document.GetItem(0).GetParagraph()->SetText("old world");
 
 			document.Undo();
+
 			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
 		}
 	}
@@ -325,139 +375,117 @@ SCENARIO("executing document commands")
 		document.InsertImage("folder/recent/r.png", 200, 300);
 		document.InsertParagraph("new world");
 
-		REQUIRE(document.GetItemsCount() == 2);
-		REQUIRE(document.GetItem(0).GetImage());
-		REQUIRE(!document.GetItem(0).GetParagraph());
-		REQUIRE(document.GetItem(1).GetParagraph());
-		REQUIRE(!document.GetItem(1).GetImage());
-
-		WHEN("deleting image")
+		WHEN("delete image")
 		{
-			std::string insertedImageRelativePath = 
-				document.GetItem(0).GetImage()->GetPath().string();
-
 			document.DeleteItem(0);
 
 			REQUIRE(document.GetItemsCount() == 1);
 			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
 			REQUIRE_THROWS(document.GetItem(1));
+		}
+
+		WHEN("undo delete image")
+		{
+			std::string insertedImageRelativePath =
+				document.GetItem(0).GetImage()->GetPath().string();
+			document.DeleteItem(0);
 
 			document.Undo();
+
 			REQUIRE(document.GetItemsCount() == 2);
 			REQUIRE(document.GetItem(0).GetImage()->GetPath() == insertedImageRelativePath);
 			REQUIRE(document.GetItem(1).GetParagraph()->GetText() == "new world");
 		}
 
-		WHEN("deleting paragraph")
+		WHEN("delete paragraph")
 		{
 			std::string insertedImageRelativePath =
 				document.GetItem(0).GetImage()->GetPath().string();
+
 			document.DeleteItem(1);
 
 			REQUIRE(document.GetItemsCount() == 1);
 			REQUIRE(document.GetItem(0).GetImage()->GetPath() == insertedImageRelativePath);
 			REQUIRE_THROWS(document.GetItem(1));
+		}
+
+		WHEN("undo delete paragraph")
+		{
+			std::string insertedImageRelativePath =
+				document.GetItem(0).GetImage()->GetPath().string();
+			document.DeleteItem(1);
 
 			document.Undo();
+
 			REQUIRE(document.GetItemsCount() == 2);
 			REQUIRE(document.GetItem(0).GetImage()->GetPath() == insertedImageRelativePath);
 			REQUIRE(document.GetItem(1).GetParagraph()->GetText() == "new world");
 		}
+
+		WHEN("save")
+		{
+			document.SetTitle("Test");
+			document.Save("folder/file.html");
+
+			std::string imagePath = document.GetItem(0).GetImage()->GetPath().string();
+			std::string context = "<!DOCTYPE html><html><head>"
+				"<title>Test</title></head><body>"
+				"<img src=\"" + imagePath + "\" width=\"200\" height=\"300\" >"
+				"<p>new world</p>"
+				"</body></html>";
+
+			REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, WriteToFile).Using("folder/file.html", context)));
+		}
 	}
 }
 
-SCENARIO("hard delete image when executing DeleteItem command")
+SCENARIO("hard delete image")
 {
-	std::shared_ptr<std::vector<std::string>> executedFileSystemCommands
-		= std::make_shared<std::vector<std::string>>();
-	IFileSystemServicesPtr fileSystemServices
-		= std::make_shared<MockFileSystem>(executedFileSystemCommands);
-	CHtmlDocument document(fileSystemServices);
+	fakeit::Mock<IFileSystemServices> fileSystemServices;
 
-	GIVEN("a document with 3 executed commands")
+	CHtmlDocument document(std::shared_ptr<IFileSystemServices>(&fileSystemServices.get()));
+
+	fakeit::Fake(Method(fileSystemServices, CreateDirectoryIfNotExists));
+	fakeit::Fake(Method(fileSystemServices, CopyFileByPath));
+	fakeit::Fake(Method(fileSystemServices, DeleteFileByPath));
+	fakeit::Fake(Dtor(fileSystemServices));
+
+	WHEN("executing new command after undo InsertingImage command")
 	{
 		document.SetTitle("first");
 		document.SetTitle("second");
 		document.SetTitle("third");
+		document.InsertImage("folder/recent/r.png", 200, 300);
+		std::string insertedImageRelativePath =
+			document.GetItem(0).GetImage()->GetPath().string();
 
-		WHEN("executing new command after undone InsertingImage command")
-		{
-			document.InsertImage("folder/recent/r.png", 200, 300);
-			std::string insertedImageRelativePath =
-				document.GetItem(0).GetImage()->GetPath().string();
-			REQUIRE(executedFileSystemCommands->size() == 2);
+		document.Undo();
+		document.Undo();
+		document.InsertParagraph("new world");
 
-			document.Undo();
-			document.Undo();
-			REQUIRE(executedFileSystemCommands->size() == 2);
-
-			document.InsertParagraph("new world");
-
-			REQUIRE(executedFileSystemCommands->size() == 3);
-			REQUIRE(executedFileSystemCommands->at(2) == "DeleteFile " + insertedImageRelativePath);
-		}
+		REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, DeleteFileByPath).Using(insertedImageRelativePath)));
 	}
-}
 
-SCENARIO("hard delete image, when executing Deleteitem command")
-{
-	std::shared_ptr<std::vector<std::string>> executedFileSystemCommands
-		= std::make_shared<std::vector<std::string>>();
-	IFileSystemServicesPtr fileSystemServices
-		= std::make_shared<MockFileSystem>(executedFileSystemCommands);
-	CHtmlDocument document(fileSystemServices);
-
-	GIVEN("an empty document")
+	WHEN("file hard deleted cuz deleting DeleteItem command due history max size")
 	{
-		WHEN("file hard deleted cuz deleting DeleteItem command due history max size")
-		{
-			document.InsertImage("folder/recent/r.png", 200, 300);
-			std::string insertedImageRelativePath =
-				document.GetItem(0).GetImage()->GetPath().string();
+		document.InsertImage("folder/recent/r.png", 200, 300);
+		std::string insertedImageRelativePath =
+			document.GetItem(0).GetImage()->GetPath().string();
 
-			REQUIRE(executedFileSystemCommands->size() == 2);
+		document.InsertParagraph("new");
+		document.InsertParagraph("old");
+		document.DeleteItem(0);
+		document.SetTitle("1");
+		document.SetTitle("2");
+		document.SetTitle("3");
+		document.SetTitle("4");
+		document.SetTitle("5");
+		document.SetTitle("6");
+		document.SetTitle("7");
+		document.SetTitle("8");
+		document.SetTitle("9");
+		document.SetTitle("10");
 
-			document.InsertParagraph("new");
-			document.InsertParagraph("old");
-			document.DeleteItem(0);
-
-			REQUIRE(document.GetItemsCount() == 2);
-			REQUIRE(executedFileSystemCommands->size() == 2);
-
-			document.SetTitle("1");
-			document.SetTitle("2");
-			document.SetTitle("3");
-			document.SetTitle("4");
-			document.SetTitle("5");
-			document.SetTitle("6");
-			document.SetTitle("7");
-			document.SetTitle("8");
-			document.SetTitle("9");
-
-			REQUIRE(executedFileSystemCommands->size() == 2);
-
-			document.SetTitle("10");
-
-			REQUIRE(executedFileSystemCommands->size() == 3);
-			REQUIRE(executedFileSystemCommands->at(2) == "DeleteFile " + insertedImageRelativePath);
-		}
+		REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, DeleteFileByPath).Using(insertedImageRelativePath)));
 	}
 }
-
-SCENARIO("testing command InsertItem")
-{
-	WHEN("")
-	{
-
-	}
-}
-
-SCENARIO("testing DeleteItem command")
-{
-	WHEN("")
-	{
-
-	}
-}
-
-// проверить удаление файла классом команды

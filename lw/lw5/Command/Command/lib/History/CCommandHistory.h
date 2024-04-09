@@ -47,7 +47,7 @@ public:
 			command->Execute();
 			for (size_t index = m_nextCommandIndex; index < m_commands.size(); index++)
 			{
-
+				DeleteCommand(index);
 			}
 			m_commands.resize(++m_nextCommandIndex);
 			m_commands.back() = move(command);

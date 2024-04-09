@@ -17,8 +17,8 @@ public:
 	}
 
 	void CopyFileByPath(
-		const std::filesystem::path& fromPath,
-		const std::filesystem::path& toPath
+		std::filesystem::path fromPath,
+		std::filesystem::path toPath
 	)override
 	{
 		try
@@ -34,7 +34,7 @@ public:
 		}
 	}
 
-	void DeleteFileByPath(const std::filesystem::path& pathToFile)override
+	void DeleteFileByPath(std::filesystem::path pathToFile)override
 	{
 		try
 		{
@@ -46,10 +46,10 @@ public:
 		}
 	}
 
-	void WriteToFile(const std::filesystem::path& path, const std::string& text)override
+	void WriteToFile(std::filesystem::path path, const std::string& text)override
 	{
 		std::ofstream outFile(path);
 		outFile << text;
-		outFile.close();// check flush throw error if unsuscced
+		outFile.close();
 	}
 };
