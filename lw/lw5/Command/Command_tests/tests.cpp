@@ -229,15 +229,24 @@ SCENARIO("executing document commands")
 	{
 		document.InsertImage("folder/recent/r.png", 200, 300);
 
+		INFO("Checks possibility of undo");
 		REQUIRE(document.CanUndo());
+		INFO("Checks items count");
 		REQUIRE(document.GetItemsCount() == 1);
+		INFO("Checks image width");
 		REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
+		INFO("Checks image height");
 		REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
+		INFO("Checks fileName");
 		REQUIRE(document.GetItem(0).GetImage()->GetPath().filename() != "r");
+		INFO("Checks file extension");
 		REQUIRE(document.GetItem(0).GetImage()->GetPath().extension() == ".png");
+		INFO("Checks parent path");
 		REQUIRE(document.GetItem(0).GetImage()->GetPath().parent_path() == "images");
 
+		INFO("Checks creation of directory images");
 		REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, CreateDirectoryIfNotExists).Using("images")));
+		INFO("Checks copy of given image");
 		REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, CopyFileByPath).Using(
 			"folder/recent/r.png",
 			document.GetItem(0).GetImage()->GetPath().string()
@@ -250,8 +259,11 @@ SCENARIO("executing document commands")
 
 		document.Undo();
 
+		INFO("Checks possibility of redo");
 		REQUIRE(document.CanRedo());
+		INFO("Checks items count");
 		REQUIRE(document.GetItemsCount() == 0);
+		INFO("Ñhecks for the absence of an item");
 		REQUIRE_THROWS(document.GetItem(0));
 	}
 
@@ -262,11 +274,17 @@ SCENARIO("executing document commands")
 		document.Undo();
 		document.Redo();
 
+		INFO("Checks items count");
 		REQUIRE(document.GetItemsCount() == 1);
+		INFO("Checks image width");
 		REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
+		INFO("Checks image height");
 		REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
+		INFO("Checks fileName");
 		REQUIRE(document.GetItem(0).GetImage()->GetPath().filename() != "r");
+		INFO("Checks file extension");
 		REQUIRE(document.GetItem(0).GetImage()->GetPath().extension() == ".png");
+		INFO("Checks parent path");
 		REQUIRE(document.GetItem(0).GetImage()->GetPath().parent_path() == "images");
 	}
 
@@ -274,7 +292,9 @@ SCENARIO("executing document commands")
 	{
 		document.InsertParagraph("new world");
 
+		INFO("Checks items count");
 		REQUIRE(document.GetItemsCount() == 1);
+		INFO("Checks text content");
 		REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
 	}
 
@@ -283,9 +303,12 @@ SCENARIO("executing document commands")
 		document.InsertParagraph("new world");
 
 		document.Undo();
-			
+		
+		INFO("Checks possibility of redo");
 		REQUIRE(document.CanRedo());
+		INFO("Checks items count");
 		REQUIRE(document.GetItemsCount() == 0);
+		INFO("Ñhecks for the absence of an item");
 		REQUIRE_THROWS(document.GetItem(0));
 	}
 
@@ -296,7 +319,9 @@ SCENARIO("executing document commands")
 		document.Undo();
 		document.Redo();
 
+		INFO("Checks items count");
 		REQUIRE(document.GetItemsCount() == 1);
+		INFO("Checks text content");
 		REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
 	}
 
@@ -304,6 +329,7 @@ SCENARIO("executing document commands")
 	{
 		document.SetTitle("new");
 
+		INFO("Checks document title content");
 		REQUIRE(document.GetTitle() == "new");
 	}
 
@@ -313,7 +339,9 @@ SCENARIO("executing document commands")
 
 		document.Undo();
 
+		INFO("Checks possibility of redo");
 		REQUIRE(document.CanRedo());
+		INFO("Checks document title content");
 		REQUIRE(document.GetTitle() == "");
 	}
 
@@ -324,6 +352,7 @@ SCENARIO("executing document commands")
 		document.Undo();
 		document.Redo();
 
+		INFO("Checks document title content");
 		REQUIRE(document.GetTitle() == "new");
 	}
 
@@ -334,7 +363,9 @@ SCENARIO("executing document commands")
 		WHEN("resize image")
 		{
 			document.GetItem(0).GetImage()->Resize(150, 900);
+			INFO("Checks image width");
 			REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 150);
+			INFO("Checks image height");
 			REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 900);
 		}
 
@@ -344,7 +375,9 @@ SCENARIO("executing document commands")
 
 			document.Undo();
 
+			INFO("Checks image width");
 			REQUIRE(document.GetItem(0).GetImage()->GetWidth() == 200);
+			INFO("Checks image height");
 			REQUIRE(document.GetItem(0).GetImage()->GetHeight() == 300);
 		}
 	}
@@ -357,6 +390,7 @@ SCENARIO("executing document commands")
 		{
 			document.GetItem(0).GetParagraph()->SetText("old world");
 
+			INFO("Checks item text content");
 			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "old world");
 		}
 
@@ -366,6 +400,7 @@ SCENARIO("executing document commands")
 
 			document.Undo();
 
+			INFO("Checks item text content");
 			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
 		}
 	}
@@ -379,8 +414,11 @@ SCENARIO("executing document commands")
 		{
 			document.DeleteItem(0);
 
+			INFO("Checks items count");
 			REQUIRE(document.GetItemsCount() == 1);
+			INFO("Checks item text content");
 			REQUIRE(document.GetItem(0).GetParagraph()->GetText() == "new world");
+			INFO("Ñhecks for the absence of an item");
 			REQUIRE_THROWS(document.GetItem(1));
 		}
 
@@ -392,8 +430,11 @@ SCENARIO("executing document commands")
 
 			document.Undo();
 
+			INFO("Checks items count");
 			REQUIRE(document.GetItemsCount() == 2);
+			INFO("Checks item text content");
 			REQUIRE(document.GetItem(0).GetImage()->GetPath() == insertedImageRelativePath);
+			INFO("Checks item text content");
 			REQUIRE(document.GetItem(1).GetParagraph()->GetText() == "new world");
 		}
 
@@ -404,8 +445,11 @@ SCENARIO("executing document commands")
 
 			document.DeleteItem(1);
 
+			INFO("Checks items count");
 			REQUIRE(document.GetItemsCount() == 1);
+			INFO("Checks image path");
 			REQUIRE(document.GetItem(0).GetImage()->GetPath() == insertedImageRelativePath);
+			INFO("Ñhecks for the absence of an item");
 			REQUIRE_THROWS(document.GetItem(1));
 		}
 
@@ -417,8 +461,11 @@ SCENARIO("executing document commands")
 
 			document.Undo();
 
+			INFO("Checks items count");
 			REQUIRE(document.GetItemsCount() == 2);
+			INFO("Checks image item path");
 			REQUIRE(document.GetItem(0).GetImage()->GetPath() == insertedImageRelativePath);
+			INFO("Checks paragraph item text");
 			REQUIRE(document.GetItem(1).GetParagraph()->GetText() == "new world");
 		}
 
@@ -434,6 +481,7 @@ SCENARIO("executing document commands")
 				"<p>new world</p>"
 				"</body></html>";
 
+			INFO("Checks invoke of writeToFile method");
 			REQUIRE_NOTHROW(fakeit::Verify(Method(fileSystemServices, WriteToFile).Using("folder/file.html", context)));
 		}
 	}
