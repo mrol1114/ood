@@ -203,7 +203,7 @@ SCENARIO("testing history")
 	}
 }
 
-// выводить сообщение об ошибке
+// print message about assertion fail
 SCENARIO("executing document commands")
 {
 	fakeit::Mock<IFileSystemServices> fileSystemServices;
